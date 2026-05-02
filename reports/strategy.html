@@ -861,39 +861,40 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
 }
 
 
-/* ── SIDEBAR COUNT BADGES ── */
-.sb-count {
-  margin-left: auto;
-  font-size: .62rem; font-weight: 700;
-  color: var(--text3);
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 1px 7px;
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-.sb-link .sb-count { margin-left: auto; }
-
-/* content-type pills on strategy links */
-.sb-meta {
-  font-size: .6rem; font-weight: 600;
-  color: var(--text3); margin-left: auto;
-  white-space: nowrap; letter-spacing: .02em;
-}
-
-/* tier group dividers inside metrics */
-.sb-tier-row {
-  display: flex; align-items: center; gap: 8px;
-  padding: 6px 16px 4px 20px;
-  font-size: .68rem; font-weight: 700;
-  color: var(--text2);
-  border-top: 1px solid var(--border);
-  margin-top: 4px;
-}
 .sb-tier-dot {
   width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
 }
+
+
+/* ── SIDEBAR DENSITY BARS ── */
+.sb-bar {
+  height: 3px;
+  border-radius: 2px;
+  margin: 5px 16px 2px;
+  background: var(--border);
+  overflow: hidden;
+}
+.sb-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  opacity: .55;
+}
+details.sb-sec > summary { padding-bottom: 4px; }
+
+.sb-tier-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 16px 2px 20px;
+  font-size: .67rem; font-weight: 700;
+  color: var(--text3);
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.sb-tier-dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+}
+.sb-meta { display: none; }
+.sb-count { display: none; }
 
 </style>
 </head>
@@ -926,44 +927,49 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
     <summary>
       <span class="sb-sec-icon">❓</span>
       <span class="sb-sec-label">Key Questions</span>
-      <span class="sb-count">19 cards</span>
       <svg class="sb-chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3,5 7,9 11,5"/></svg>
     </summary>
+    <div class="sb-bar"><div class="sb-bar-fill" style="width:100%;background:#7c3aed"></div></div>
     <div class="sb-sec-body">
       <a class="sb-link sb-top" href="#questions">All Questions</a>
       <div class="sb-divider"></div>
-      <a class="sb-link" href="#qg-revenue">💰 Revenue &amp; Margin <span class="sb-count">4</span></a>
-      <a class="sb-link" href="#qg-economics">📐 Customer Economics <span class="sb-count">4</span></a>
-      <a class="sb-link" href="#qg-retention">🔁 Retention &amp; Churn <span class="sb-count">5</span></a>
-      <a class="sb-link" href="#qg-channel">📧 Channel &amp; Email <span class="sb-count">2</span></a>
-      <a class="sb-link" href="#qg-conversion">🛒 Conversion &amp; Mix <span class="sb-count">4</span></a>
+      <a class="sb-link" href="#qg-revenue">💰 Revenue &amp; Margin</a>
+      <div class="sb-bar"><div class="sb-bar-fill" style="width:80%;background:#d97706"></div></div>
+      <a class="sb-link" href="#qg-economics">📐 Customer Economics</a>
+      <div class="sb-bar"><div class="sb-bar-fill" style="width:80%;background:#0d9488"></div></div>
+      <a class="sb-link" href="#qg-retention">🔁 Retention &amp; Churn</a>
+      <div class="sb-bar"><div class="sb-bar-fill" style="width:100%;background:#7c3aed"></div></div>
+      <a class="sb-link" href="#qg-channel">📧 Channel &amp; Email</a>
+      <div class="sb-bar"><div class="sb-bar-fill" style="width:40%;background:#16a34a"></div></div>
+      <a class="sb-link" href="#qg-conversion">🛒 Conversion &amp; Mix</a>
+      <div class="sb-bar"><div class="sb-bar-fill" style="width:80%;background:#2563eb"></div></div>
     </div>
   </details>
 
-  <!-- METRICS FRAMEWORK — tier groups only (not 16 individual links) -->
+  <!-- METRICS FRAMEWORK -->
   <details class="sb-sec" open>
     <summary>
       <span class="sb-sec-icon">📊</span>
       <span class="sb-sec-label">Metrics Framework</span>
-      <span class="sb-count">16 metrics</span>
       <svg class="sb-chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3,5 7,9 11,5"/></svg>
     </summary>
+    <div class="sb-bar"><div class="sb-bar-fill" style="width:85%;background:#d97706"></div></div>
     <div class="sb-sec-body">
       <a class="sb-link sb-top" href="#overview">Overview &amp; Pyramid</a>
       <div class="sb-divider"></div>
-      <div class="sb-tier-row"><span class="sb-tier-dot" style="background:#d97706"></span>Tier 1 — Business Health<span class="sb-count" style="margin-left:auto">5</span></div>
+      <div class="sb-tier-row"><span class="sb-tier-dot" style="background:#d97706"></span>Tier 1 — Business Health</div>
       <a class="sb-link" href="#metric-m1"><span class="sb-dot" style="background:#d97706"></span>M1 · Net Revenue by Market</a>
       <a class="sb-link" href="#metric-m2"><span class="sb-dot" style="background:#d97706"></span>M2 · New vs Returning</a>
       <a class="sb-link" href="#metric-m3"><span class="sb-dot" style="background:#0d9488"></span>M3 · LTV:CAC by Channel</a>
       <a class="sb-link" href="#metric-m4"><span class="sb-dot" style="background:#7c3aed"></span>M4 · Repeat Rate 90d</a>
       <a class="sb-link" href="#metric-m5"><span class="sb-dot" style="background:#d97706"></span>M5 · Gross Margin %</a>
-      <div class="sb-tier-row"><span class="sb-tier-dot" style="background:#0d9488"></span>Tier 2 — Growth Levers<span class="sb-count" style="margin-left:auto">5</span></div>
+      <div class="sb-tier-row"><span class="sb-tier-dot" style="background:#0d9488"></span>Tier 2 — Growth Levers</div>
       <a class="sb-link" href="#metric-m6"><span class="sb-dot" style="background:#0d9488"></span>M6 · CAC by Channel</a>
       <a class="sb-link" href="#metric-m7"><span class="sb-dot" style="background:#7c3aed"></span>M7 · Email Revenue %</a>
       <a class="sb-link" href="#metric-m8"><span class="sb-dot" style="background:#d97706"></span>M8 · AOV Trend MoM</a>
       <a class="sb-link" href="#metric-m9"><span class="sb-dot" style="background:#2563eb"></span>M9 · Checkout Funnel</a>
       <a class="sb-link" href="#metric-m10"><span class="sb-dot" style="background:#e11d48"></span>M10 · Subscription Mix</a>
-      <div class="sb-tier-row"><span class="sb-tier-dot" style="background:#7c3aed"></span>Tier 3 — Retention Intel<span class="sb-count" style="margin-left:auto">6</span></div>
+      <div class="sb-tier-row"><span class="sb-tier-dot" style="background:#7c3aed"></span>Tier 3 — Retention Intel</div>
       <a class="sb-link" href="#metric-m11"><span class="sb-dot" style="background:#7c3aed"></span>M11 · Cohort Retention</a>
       <a class="sb-link" href="#metric-m12"><span class="sb-dot" style="background:#7c3aed"></span>M12 · Time to 2nd Purchase</a>
       <a class="sb-link" href="#metric-m13"><span class="sb-dot" style="background:#7c3aed"></span>M13 · Churn Risk</a>
@@ -978,21 +984,28 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
     <summary>
       <span class="sb-sec-icon">🗺</span>
       <span class="sb-sec-label">Strategies</span>
-      <span class="sb-count">5</span>
       <svg class="sb-chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3,5 7,9 11,5"/></svg>
     </summary>
+    <div class="sb-bar"><div class="sb-bar-fill" style="width:90%;background:#e11d48"></div></div>
     <div class="sb-sec-body">
-      <a class="sb-link sb-top" href="#s1"><span class="sb-strat" style="background:#7c3aed">S1</span>Retention Engine<span class="sb-meta">funnel · flow · SQL</span></a>
-      <a class="sb-link sb-top" href="#s2"><span class="sb-strat" style="background:#0d9488">S2</span>Channel Efficiency<span class="sb-meta">2 flows · table · SQL</span></a>
-      <a class="sb-link sb-top" href="#s3"><span class="sb-strat" style="background:#d97706">S3</span>Geo Expansion<span class="sb-meta">map · decision tree</span></a>
-      <a class="sb-link sb-top" href="#s4"><span class="sb-strat" style="background:#e11d48">S4</span>Subscription Flywheel<span class="sb-meta">funnel · 2 flows · SQL</span></a>
-      <a class="sb-link sb-top" href="#s5"><span class="sb-strat" style="background:#2563eb">S5</span>Funnel Conversion<span class="sb-meta">funnel · tree · SQL</span></a>
+      <a class="sb-link sb-top" href="#s1"><span class="sb-strat" style="background:#7c3aed">S1</span>Retention Engine</a>
+      <div class="sb-bar"><div class="sb-bar-fill" style="width:65%;background:#7c3aed"></div></div>
+      <a class="sb-link sb-top" href="#s2"><span class="sb-strat" style="background:#0d9488">S2</span>Channel Efficiency</a>
+      <div class="sb-bar"><div class="sb-bar-fill" style="width:90%;background:#0d9488"></div></div>
+      <a class="sb-link sb-top" href="#s3"><span class="sb-strat" style="background:#d97706">S3</span>Geo Expansion</a>
+      <div class="sb-bar"><div class="sb-bar-fill" style="width:50%;background:#d97706"></div></div>
+      <a class="sb-link sb-top" href="#s4"><span class="sb-strat" style="background:#e11d48">S4</span>Subscription Flywheel</a>
+      <div class="sb-bar"><div class="sb-bar-fill" style="width:80%;background:#e11d48"></div></div>
+      <a class="sb-link sb-top" href="#s5"><span class="sb-strat" style="background:#2563eb">S5</span>Funnel Conversion</a>
+      <div class="sb-bar"><div class="sb-bar-fill" style="width:75%;background:#2563eb"></div></div>
     </div>
   </details>
 
   <div class="sb-divider"></div>
-  <a class="sb-standalone" href="#arch">🏗 &nbsp;Data Architecture<span class="sb-count" style="margin-left:auto">4 stories</span></a>
-  <a class="sb-standalone" href="#roadmap">🗓 &nbsp;Roadmap<span class="sb-count" style="margin-left:auto">4 phases</span></a>
+  <a class="sb-standalone" href="#arch">🏗 &nbsp;Data Architecture</a>
+  <div class="sb-bar"><div class="sb-bar-fill" style="width:95%;background:#2563eb"></div></div>
+  <a class="sb-standalone" href="#roadmap">🗓 &nbsp;Roadmap</a>
+  <div class="sb-bar"><div class="sb-bar-fill" style="width:40%;background:#d97706"></div></div>
 </aside>
 <div id="main">
 <!-- HERO -->
