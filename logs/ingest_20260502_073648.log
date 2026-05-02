@@ -1,0 +1,45 @@
+2026-05-02 07:36:48,213 INFO ============================================================
+2026-05-02 07:36:48,213 INFO VAHDAM DTC Ingestion — 2026-05-02 07:36:48
+2026-05-02 07:36:48,213 INFO Sources: matrixify, shopify_analytics, klaviyo, webengage
+2026-05-02 07:36:48,213 INFO Log file: C:\Users\Archit Tandon\Desktop\vahdam-dtc-data-engine\logs\ingest_20260502_073648.log
+2026-05-02 07:36:48,214 INFO ============================================================
+2026-05-02 07:36:48,214 INFO ────────────────────────────────────────────────────────────
+2026-05-02 07:36:48,214 INFO Loading Matrixify (Shopify raw) data...
+2026-05-02 07:36:48,861 INFO matrixify.customers — 3000 rows in 0.12s
+2026-05-02 07:36:48,876 INFO matrixify.discounts — 4 rows in 0.01s
+2026-05-02 07:36:49,655 INFO matrixify.order_line_items — 14943 rows in 0.78s
+2026-05-02 07:36:49,954 INFO matrixify.orders — 7418 rows in 0.30s
+2026-05-02 07:36:49,966 INFO matrixify.product_variants — 30 rows in 0.01s
+2026-05-02 07:36:49,980 INFO matrixify.products — 10 rows in 0.01s
+2026-05-02 07:36:50,146 INFO ✓ matrixify — 25405 rows in 1.93s
+2026-05-02 07:36:50,146 INFO ────────────────────────────────────────────────────────────
+2026-05-02 07:36:50,146 INFO Loading Shopify Analytics data...
+2026-05-02 07:36:50,228 INFO shopify_analytics.acquisition_metrics — 27 rows in 0.06s
+2026-05-02 07:36:50,270 INFO shopify_analytics.conversion_funnel — 27 rows in 0.04s
+2026-05-02 07:36:50,304 INFO shopify_analytics.customer_metrics — 27 rows in 0.03s
+2026-05-02 07:36:50,342 INFO shopify_analytics.marketing_attribution — 27 rows in 0.04s
+2026-05-02 07:36:50,383 INFO shopify_analytics.revenue_metrics — 27 rows in 0.04s
+2026-05-02 07:36:50,420 INFO shopify_analytics.traffic_metrics — 27 rows in 0.04s
+2026-05-02 07:36:50,467 INFO ✓ shopify_analytics — 162 rows in 0.32s
+2026-05-02 07:36:50,467 INFO ────────────────────────────────────────────────────────────
+2026-05-02 07:36:50,467 INFO Loading Klaviyo email/SMS data...
+2026-05-02 07:36:50,516 INFO klaviyo.campaigns — 60 rows in 0.03s
+2026-05-02 07:36:50,528 ERROR Error loading events.csv: Constraint Error: Duplicate key "event_id: evt144922795203" violates primary key constraint.
+2026-05-02 07:36:50,538 INFO klaviyo.flows — 5 rows in 0.01s
+2026-05-02 07:36:50,625 INFO klaviyo.profiles — 2500 rows in 0.09s
+2026-05-02 07:36:50,678 INFO ✓ klaviyo — 2565 rows in 0.21s
+2026-05-02 07:36:50,678 INFO ────────────────────────────────────────────────────────────
+2026-05-02 07:36:50,678 INFO Loading WebEngage CDP data...
+2026-05-02 07:36:50,744 ERROR Error loading events.csv: Constraint Error: Duplicate key "id: wev155273640178" violates primary key constraint.
+2026-05-02 07:36:50,806 INFO webengage.user_profiles — 2000 rows in 0.06s
+2026-05-02 07:36:50,862 INFO ✓ webengage — 2000 rows in 0.18s
+2026-05-02 07:36:50,863 INFO ============================================================
+2026-05-02 07:36:50,863 INFO SUMMARY
+2026-05-02 07:36:50,863 INFO ============================================================
+2026-05-02 07:36:50,863 INFO ✓  matrixify                   25405 rows  1.93s
+2026-05-02 07:36:50,863 INFO ✓  shopify_analytics             162 rows  0.32s
+2026-05-02 07:36:50,863 INFO ✓  klaviyo                      2565 rows  0.21s
+2026-05-02 07:36:50,863 INFO ✓  webengage                    2000 rows  0.18s
+2026-05-02 07:36:50,863 INFO ────────────────────────────────────────────────────────────
+2026-05-02 07:36:50,863 INFO Total: 30132 rows in 2.65s
+2026-05-02 07:36:50,863 INFO ============================================================

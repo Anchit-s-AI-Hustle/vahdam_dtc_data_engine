@@ -1,0 +1,46 @@
+2026-05-02 07:33:48,150 INFO ============================================================
+2026-05-02 07:33:48,150 INFO VAHDAM DTC Ingestion — 2026-05-02 07:33:48
+2026-05-02 07:33:48,150 INFO Sources: matrixify, shopify_analytics, klaviyo, webengage
+2026-05-02 07:33:48,150 INFO Log file: C:\Users\Archit Tandon\Desktop\vahdam-dtc-data-engine\logs\ingest_20260502_073348.log
+2026-05-02 07:33:48,152 INFO ============================================================
+2026-05-02 07:33:48,152 INFO ────────────────────────────────────────────────────────────
+2026-05-02 07:33:48,155 INFO Loading Matrixify (Shopify raw) data...
+2026-05-02 07:33:48,679 INFO matrixify.customers — 3000 rows in 0.10s
+2026-05-02 07:33:48,691 INFO matrixify.discounts — 4 rows in 0.01s
+2026-05-02 07:33:48,864 INFO matrixify.order_line_items — 14943 rows in 0.17s
+2026-05-02 07:33:49,011 INFO matrixify.orders — 7418 rows in 0.15s
+2026-05-02 07:33:49,028 ERROR Error loading product_variants.csv: Conversion Error: Unimplemented type for cast (TIMESTAMP_NS -> DECIMAL(18,2)) when casting from source column compare_at_price
+2026-05-02 07:33:49,039 INFO matrixify.products — 10 rows in 0.01s
+2026-05-02 07:33:49,180 INFO ✓ matrixify — 25375 rows in 1.03s
+2026-05-02 07:33:49,181 INFO ────────────────────────────────────────────────────────────
+2026-05-02 07:33:49,182 INFO Loading Shopify Analytics data...
+2026-05-02 07:33:49,234 INFO shopify_analytics.acquisition_metrics — 27 rows in 0.03s
+2026-05-02 07:33:49,254 INFO shopify_analytics.conversion_funnel — 27 rows in 0.02s
+2026-05-02 07:33:49,275 INFO shopify_analytics.customer_metrics — 27 rows in 0.02s
+2026-05-02 07:33:49,296 INFO shopify_analytics.marketing_attribution — 27 rows in 0.02s
+2026-05-02 07:33:49,316 INFO shopify_analytics.revenue_metrics — 27 rows in 0.02s
+2026-05-02 07:33:49,335 INFO shopify_analytics.traffic_metrics — 27 rows in 0.02s
+2026-05-02 07:33:49,374 INFO ✓ shopify_analytics — 162 rows in 0.19s
+2026-05-02 07:33:49,375 INFO ────────────────────────────────────────────────────────────
+2026-05-02 07:33:49,375 INFO Loading Klaviyo email/SMS data...
+2026-05-02 07:33:49,418 ERROR Error loading campaigns.csv: Conversion Error: Unimplemented type for cast (TIMESTAMP_NS -> DECIMAL(18,2)) when casting from source column revenue_attributed
+2026-05-02 07:33:49,430 INFO klaviyo.events — 500 rows in 0.01s
+2026-05-02 07:33:49,440 ERROR Error loading flows.csv: Conversion Error: Unimplemented type for cast (TIMESTAMP_NS -> DECIMAL(18,2)) when casting from source column revenue_attributed
+2026-05-02 07:33:49,489 INFO klaviyo.profiles — 2500 rows in 0.05s
+2026-05-02 07:33:49,530 INFO ✓ klaviyo — 3000 rows in 0.15s
+2026-05-02 07:33:49,530 INFO ────────────────────────────────────────────────────────────
+2026-05-02 07:33:49,531 INFO Loading WebEngage CDP data...
+2026-05-02 07:33:49,624 INFO webengage.events — 8000 rows in 0.07s
+2026-05-02 07:33:49,668 INFO webengage.user_profiles — 2000 rows in 0.04s
+2026-05-02 07:33:49,709 INFO Rebuilt webengage.event_summary — 5701 rows
+2026-05-02 07:33:49,822 INFO ✓ webengage — 10000 rows in 0.29s
+2026-05-02 07:33:49,822 INFO ============================================================
+2026-05-02 07:33:49,822 INFO SUMMARY
+2026-05-02 07:33:49,822 INFO ============================================================
+2026-05-02 07:33:49,822 INFO ✓  matrixify                   25375 rows  1.03s
+2026-05-02 07:33:49,823 INFO ✓  shopify_analytics             162 rows  0.19s
+2026-05-02 07:33:49,823 INFO ✓  klaviyo                      3000 rows  0.15s
+2026-05-02 07:33:49,823 INFO ✓  webengage                   10000 rows  0.29s
+2026-05-02 07:33:49,824 INFO ────────────────────────────────────────────────────────────
+2026-05-02 07:33:49,824 INFO Total: 38537 rows in 1.67s
+2026-05-02 07:33:49,824 INFO ============================================================

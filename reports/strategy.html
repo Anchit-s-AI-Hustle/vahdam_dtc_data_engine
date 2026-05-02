@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAHDAM DTC Growth Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f8f9fb;
+  --bg2: #ffffff;
+  --bg3: #f1f3f7;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.05);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.10);
+  --purple: #7c3aed; --purple-light: #ede9fe; --purple-dark: #5b21b6;
+  --teal:   #0d9488; --teal-light:   #ccfbf1; --teal-dark:   #0f766e;
+  --amber:  #d97706; --amber-light:  #fef3c7; --amber-dark:  #b45309;
+  --coral:  #e11d48; --coral-light:  #ffe4e6; --coral-dark:  #be123c;
+  --blue:   #2563eb; --blue-light:   #dbeafe; --blue-dark:   #1d4ed8;
+  --green:  #16a34a;
+  --font: 'Inter', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1117; --bg2: #161b22; --bg3: #1c2128;
+    --text: #e6edf3; --text2: #8b949e; --text3: #484f58;
+    --border: #30363d;
+    --shadow: 0 1px 3px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+    --purple-light: #2d1f5e; --teal-light: #0d2926; --amber-light: #2d1f0a;
+    --coral-light: #2d0a14; --blue-light: #0d1f3c;
+  }
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; }
+
+/* ── NAV ── */
+#nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg2); border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 0 24px;
+  display: flex; align-items: center; gap: 8px; height: 56px;
+  overflow-x: auto; scrollbar-width: none;
+}
+#nav::-webkit-scrollbar { display: none; }
+.nav-brand { font-weight: 800; font-size: .85rem; color: var(--text); white-space: nowrap; margin-right: 12px; }
+.nav-brand span { color: var(--amber); }
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border);
+  font-size: .78rem; font-weight: 600; white-space: nowrap; cursor: pointer;
+  text-decoration: none; color: var(--text2); background: var(--bg3);
+  transition: all .18s;
+}
+.pill:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+.pill.p1 { color: var(--purple); border-color: var(--purple); }
+.pill.p1:hover { background: var(--purple-light); }
+.pill.p2 { color: var(--teal);   border-color: var(--teal); }
+.pill.p2:hover { background: var(--teal-light); }
+.pill.p3 { color: var(--amber);  border-color: var(--amber); }
+.pill.p3:hover { background: var(--amber-light); }
+.pill.p4 { color: var(--coral);  border-color: var(--coral); }
+.pill.p4:hover { background: var(--coral-light); }
+.pill.p5 { color: var(--blue);   border-color: var(--blue); }
+.pill.p5:hover { background: var(--blue-light); }
+
+/* ── HERO ── */
+#hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  color: #fff; padding: 80px 40px 72px; text-align: center;
+}
+.hero-eyebrow { font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #818cf8; margin-bottom: 16px; }
+.hero-title { font-size: clamp(2rem,5vw,3.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+.hero-title span { background: linear-gradient(90deg,#a78bfa,#38bdf8,#34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: 1.1rem; color: #94a3b8; max-width: 560px; margin: 0 auto 40px; }
+.hero-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.hero-pill {
+  padding: 8px 20px; border-radius: 999px; font-size: .82rem; font-weight: 600;
+  border: 1px solid rgba(255,255,255,.15); color: #e2e8f0; cursor: pointer;
+  text-decoration: none; transition: all .18s; background: rgba(255,255,255,.05);
+}
+.hero-pill:hover { background: rgba(255,255,255,.12); transform: translateY(-2px); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+section { padding: 72px 0; }
+section:nth-child(even) { background: var(--bg2); }
+
+.section-label { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+.section-title { font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800; margin-bottom: 12px; }
+.section-sub { font-size: 1rem; color: var(--text2); max-width: 640px; margin-bottom: 40px; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+  padding: 24px; box-shadow: var(--shadow);
+}
+.card-grid { display: grid; gap: 20px; }
+.card-grid.cols2 { grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); }
+.card-grid.cols3 { grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); }
+.card-grid.cols4 { grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
+
+/* ── STRATEGY SECTIONS ── */
+.strategy-section { border-left: 4px solid; padding-left: 0; }
+.strategy-section.s1 { border-color: var(--purple); }
+.strategy-section.s2 { border-color: var(--teal); }
+.strategy-section.s3 { border-color: var(--amber); }
+.strategy-section.s4 { border-color: var(--coral); }
+.strategy-section.s5 { border-color: var(--blue); }
+
+.why-box {
+  border-radius: 10px; padding: 20px 24px; margin-bottom: 32px;
+  border-left: 3px solid;
+}
+.s1 .why-box { background: var(--purple-light); border-color: var(--purple); }
+.s2 .why-box { background: var(--teal-light);   border-color: var(--teal); }
+.s3 .why-box { background: var(--amber-light);  border-color: var(--amber); }
+.s4 .why-box { background: var(--coral-light);  border-color: var(--coral); }
+.s5 .why-box { background: var(--blue-light);   border-color: var(--blue); }
+.why-box h4 { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+.s1 .why-box h4 { color: var(--purple); }
+.s2 .why-box h4 { color: var(--teal); }
+.s3 .why-box h4 { color: var(--amber); }
+.s4 .why-box h4 { color: var(--coral); }
+.s5 .why-box h4 { color: var(--blue); }
+.why-box p { font-size: .93rem; color: var(--text2); line-height: 1.65; }
+
+/* ── WORKFLOW DIAGRAM ── */
+.workflow { display: flex; flex-wrap: wrap; align-items: center; gap: 0; margin: 24px 0 32px; }
+.wf-box {
+  flex: 1; min-width: 120px; max-width: 160px;
+  padding: 12px 14px; border-radius: 8px;
+  background: var(--bg3); border: 1px solid var(--border);
+  text-align: center; font-size: .78rem; font-weight: 600; color: var(--text);
+  line-height: 1.4;
+}
+.wf-box.accent-purple { background: var(--purple-light); border-color: var(--purple); color: var(--purple-dark); }
+.wf-box.accent-teal   { background: var(--teal-light);   border-color: var(--teal);   color: var(--teal-dark); }
+.wf-box.accent-amber  { background: var(--amber-light);  border-color: var(--amber);  color: var(--amber-dark); }
+.wf-box.accent-coral  { background: var(--coral-light);  border-color: var(--coral);  color: var(--coral-dark); }
+.wf-box.accent-blue   { background: var(--blue-light);   border-color: var(--blue);   color: var(--blue-dark); }
+.wf-arrow {
+  flex: 0 0 28px; text-align: center; font-size: 1.1rem; color: var(--text3);
+  font-weight: 300;
+}
+@media (max-width: 680px) {
+  .workflow { flex-direction: column; align-items: stretch; }
+  .wf-arrow { transform: rotate(90deg); align-self: center; }
+  .wf-box { max-width: 100%; }
+}
+
+/* ── DECISION TREE ── */
+.dtree { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); margin: 24px 0 32px; }
+.dt-card {
+  border-radius: 10px; padding: 18px 20px; border: 1px solid var(--border);
+  background: var(--bg2); position: relative; overflow: hidden;
+}
+.dt-card::before { content: ''; position: absolute; top:0; left:0; right:0; height: 3px; }
+.s1 .dt-card::before { background: var(--purple); }
+.s2 .dt-card::before { background: var(--teal); }
+.s3 .dt-card::before { background: var(--amber); }
+.s4 .dt-card::before { background: var(--coral); }
+.s5 .dt-card::before { background: var(--blue); }
+.dt-if { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--text3); margin-bottom: 6px; }
+.dt-condition { font-size: .88rem; font-weight: 600; color: var(--text); margin-bottom: 10px; line-height: 1.4; }
+.dt-then { font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); margin-bottom: 4px; }
+.dt-action { font-size: .85rem; color: var(--text2); line-height: 1.45; }
+
+/* ── METRICS USED STRIP ── */
+.metrics-strip { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 32px; }
+.metric-badge {
+  padding: 4px 12px; border-radius: 999px; font-size: .72rem; font-weight: 600;
+  border: 1px solid; display: inline-flex; align-items: center; gap: 5px;
+}
+.badge-purple { color: var(--purple); border-color: var(--purple); background: var(--purple-light); }
+.badge-teal   { color: var(--teal);   border-color: var(--teal);   background: var(--teal-light); }
+.badge-amber  { color: var(--amber);  border-color: var(--amber);  background: var(--amber-light); }
+.badge-coral  { color: var(--coral);  border-color: var(--coral);  background: var(--coral-light); }
+.badge-blue   { color: var(--blue);   border-color: var(--blue);   background: var(--blue-light); }
+.badge-gray   { color: var(--text2);  border-color: var(--border); background: var(--bg3); }
+
+.src-badge { font-size: .65rem; font-weight: 700; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; letter-spacing: .05em; }
+.src-matrixify { background: #fef3c7; color: #92400e; }
+.src-shopify   { background: #d1fae5; color: #065f46; }
+.src-klaviyo   { background: #ede9fe; color: #5b21b6; }
+.src-webengage { background: #dbeafe; color: #1e40af; }
+
+/* ── SQL BLOCK ── */
+.sql-block { margin: 24px 0; }
+.sql-block h5 {
+  font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--text3); margin-bottom: 8px;
+}
+pre {
+  background: #0d1117; border: 1px solid #30363d; border-radius: 10px;
+  padding: 20px 22px; overflow-x: auto; font-size: .8rem; line-height: 1.7;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+.kw  { color: #ff7b72; }
+.fn  { color: #d2a8ff; }
+.str { color: #a5d6ff; }
+.cm  { color: #8b949e; font-style: italic; }
+.id  { color: #e6edf3; }
+.op  { color: #79c0ff; }
+.num { color: #79c0ff; }
+
+/* ── METRICS PYRAMID ── */
+.pyramid { margin: 32px auto; max-width: 720px; }
+.pyramid-tier {
+  border-radius: 10px; padding: 20px 24px; margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+.pyramid-tier.t1 { background: linear-gradient(135deg, #fef3c7, #fff7ed); border-color: #fcd34d; }
+.pyramid-tier.t2 { background: linear-gradient(135deg, #dbeafe, #ede9fe); border-color: #93c5fd; }
+.pyramid-tier.t3 { background: linear-gradient(135deg, #d1fae5, #ccfbf1); border-color: #6ee7b7; }
+@media (prefers-color-scheme: dark) {
+  .pyramid-tier.t1 { background: linear-gradient(135deg,#2d1f0a,#1c1400); border-color: #78350f; }
+  .pyramid-tier.t2 { background: linear-gradient(135deg,#0d1f3c,#1a0f3c); border-color: #1d4ed8; }
+  .pyramid-tier.t3 { background: linear-gradient(135deg,#022c22,#0d2926); border-color: #065f46; }
+}
+.tier-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+.tier-label { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; }
+.t1 .tier-label { color: #92400e; }
+.t2 .tier-label { color: #1d4ed8; }
+.t3 .tier-label { color: #065f46; }
+.tier-freq { font-size: .7rem; font-weight: 600; padding: 2px 10px; border-radius: 999px; }
+.t1 .tier-freq { background: #fcd34d; color: #78350f; }
+.t2 .tier-freq { background: #93c5fd; color: #1e40af; }
+.t3 .tier-freq { background: #6ee7b7; color: #065f46; }
+.metric-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.metric-item {
+  padding: 8px 12px; border-radius: 8px; font-size: .78rem; font-weight: 600;
+  background: rgba(255,255,255,.6); border: 1px solid rgba(0,0,0,.07);
+  display: flex; align-items: center; gap: 8px;
+}
+@media (prefers-color-scheme: dark) {
+  .metric-item { background: rgba(0,0,0,.3); border-color: rgba(255,255,255,.06); }
+}
+
+/* ── NORTH STAR ── */
+.north-star {
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  border-radius: 16px; padding: 32px 36px; color: #fff; margin-bottom: 40px;
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.ns-icon { font-size: 3rem; flex-shrink: 0; }
+.ns-label { font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .8; margin-bottom: 6px; }
+.ns-metric { font-size: 2rem; font-weight: 900; margin-bottom: 6px; }
+.ns-desc { font-size: .9rem; opacity: .85; max-width: 460px; }
+
+/* ── FUNNEL VIZ ── */
+.funnel-viz { display: flex; gap: 6px; align-items: flex-end; margin: 24px 0 32px; flex-wrap: wrap; }
+.funnel-bar { flex: 1; min-width: 80px; border-radius: 8px 8px 0 0; position: relative; overflow: visible; }
+.funnel-bar-inner { border-radius: 6px 6px 0 0; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 10px; }
+.funnel-label { text-align: center; padding: 8px 4px 0; font-size: .72rem; font-weight: 600; color: var(--text2); }
+.funnel-pct { font-size: .9rem; font-weight: 800; color: var(--text); text-align: center; }
+.funnel-stage { font-size: .68rem; text-align: center; color: var(--text3); margin-top: 2px; }
+
+/* ── DATA ARCH ── */
+.arch-flow {
+  display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+  gap: 16px; margin: 24px 0;
+}
+.arch-source {
+  border-radius: 10px; padding: 18px 16px; text-align: center;
+  border: 1px solid var(--border); background: var(--bg2);
+}
+.arch-arrow-col { display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--text3); }
+.arch-db {
+  background: linear-gradient(135deg,#1e1b4b,#0f172a);
+  border-radius: 14px; padding: 24px; color: #fff; text-align: center;
+  margin: 16px 0; border: 1px solid #312e81;
+}
+
+/* ── TABLE ── */
+table { width: 100%; border-collapse: collapse; font-size: .87rem; }
+th { background: var(--bg3); padding: 10px 14px; text-align: left; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text2); border-bottom: 2px solid var(--border); }
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--bg3); }
+
+/* ── TIMELINE ── */
+.timeline { position: relative; margin: 32px 0; }
+.timeline::before { content:''; position:absolute; left:20px; top:0; bottom:0; width:2px; background: var(--border); }
+.tl-item { position:relative; padding-left: 56px; margin-bottom: 28px; }
+.tl-dot {
+  position:absolute; left:12px; top:4px; width:18px; height:18px; border-radius:50%;
+  border:2px solid var(--border); background: var(--bg2); display:flex; align-items:center; justify-content:center;
+  font-size:.55rem; font-weight:800;
+}
+.tl-phase { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--text3); margin-bottom:4px; }
+.tl-title { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:6px; }
+.tl-tasks { list-style:none; }
+.tl-tasks li { font-size:.87rem; color:var(--text2); padding:2px 0; display:flex; gap:8px; }
+.tl-tasks li::before { content:'→'; color:var(--text3); flex-shrink:0; }
+.tl-item:nth-child(1) .tl-dot { background:var(--purple); border-color:var(--purple); }
+.tl-item:nth-child(2) .tl-dot { background:var(--teal); border-color:var(--teal); }
+.tl-item:nth-child(3) .tl-dot { background:var(--amber); border-color:var(--amber); }
+.tl-item:nth-child(4) .tl-dot { background:var(--blue); border-color:var(--blue); }
+
+/* ── LTV BAR ── */
+.ltv-compare { display:flex; gap:16px; align-items:flex-end; margin: 20px 0 32px; }
+.ltv-bar-wrap { flex:1; }
+.ltv-label { font-size:.78rem; font-weight:600; color:var(--text2); margin-bottom:6px; text-align:center; }
+.ltv-bar { border-radius:8px 8px 0 0; display:flex; align-items:center; justify-content:center; font-size:.9rem; font-weight:800; color:#fff; padding:10px 0; }
+.ltv-val { font-size:.8rem; font-weight:700; color:var(--text); margin-top:4px; text-align:center; }
+
+/* ── DIVIDER ── */
+.section-divider { height: 1px; background: var(--border); margin: 0; }
+
+/* ── FOOTER ── */
+footer {
+  background: #0d1117; color: #8b949e; text-align:center;
+  padding: 32px 24px; font-size: .83rem;
+}
+footer strong { color: #e6edf3; }
+footer a { color: #58a6ff; text-decoration:none; }
+
+/* ── QUESTION CARDS ── */
+.q-group { margin-bottom: 52px; }
+.q-group-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+  padding-bottom: 12px; border-bottom: 2px solid var(--border);
+}
+.q-group-icon { font-size: 1.3rem; }
+.q-group-title { font-size: 1rem; font-weight: 800; color: var(--text); }
+.q-group-sub { font-size: .8rem; color: var(--text3); margin-left: auto; white-space: nowrap; }
+.q-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.q-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px 22px; display: flex; flex-direction: column; gap: 12px;
+  box-shadow: var(--shadow); transition: box-shadow .18s, transform .18s;
+  position: relative;
+}
+.q-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.q-card.combo { border-color: transparent; }
+.q-card.combo::before {
+  content: ''; position: absolute; inset: 0; border-radius: 12px;
+  padding: 1px; background: linear-gradient(135deg,var(--combo-a),var(--combo-b));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none;
+}
+.combo-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .65rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
+  padding: 3px 8px; border-radius: 4px;
+  background: linear-gradient(90deg, var(--combo-a), var(--combo-b));
+  color: #fff; width: fit-content;
+}
+.q-question {
+  font-size: .97rem; font-weight: 700; color: var(--text); line-height: 1.45;
+}
+.q-answer { font-size: .83rem; color: var(--text2); line-height: 1.6; }
+.q-metrics { display: flex; flex-wrap: wrap; gap: 6px; }
+.q-signal {
+  font-size: .78rem; color: var(--text2); background: var(--bg3);
+  border-radius: 6px; padding: 7px 10px; border-left: 3px solid var(--border);
+  line-height: 1.5;
+}
+.signal-good  { border-left-color: var(--green);  }
+.signal-watch { border-left-color: var(--amber);  }
+.signal-bad   { border-left-color: var(--coral);  }
+.q-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+.q-detail-link {
+  font-size: .75rem; font-weight: 700; text-decoration: none; padding: 4px 12px;
+  border-radius: 999px; border: 1px solid var(--border); color: var(--text2);
+  background: var(--bg3); transition: all .15s; white-space: nowrap;
+}
+.q-detail-link:hover { background: var(--border); color: var(--text); }
+.q-detail-link.lk-purple { color: var(--purple); border-color: var(--purple); }
+.q-detail-link.lk-purple:hover { background: var(--purple-light); }
+.q-detail-link.lk-teal   { color: var(--teal);   border-color: var(--teal); }
+.q-detail-link.lk-teal:hover   { background: var(--teal-light); }
+.q-detail-link.lk-amber  { color: var(--amber);  border-color: var(--amber); }
+.q-detail-link.lk-amber:hover  { background: var(--amber-light); }
+.q-detail-link.lk-coral  { color: var(--coral);  border-color: var(--coral); }
+.q-detail-link.lk-coral:hover  { background: var(--coral-light); }
+.q-detail-link.lk-blue   { color: var(--blue);   border-color: var(--blue); }
+.q-detail-link.lk-blue:hover   { background: var(--blue-light); }
+.metric-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .7rem; font-weight: 600; padding: 3px 9px;
+  border-radius: 999px; border: 1px solid var(--border);
+  background: var(--bg3); color: var(--text2); white-space: nowrap;
+}
+.metric-pill .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── PLACEHOLDERS ── */
+mark.ph {
+  background: #fef9c3; color: #854d0e;
+  border: 1.5px dashed #ca8a04;
+  border-radius: 4px;
+  padding: 1px 7px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: .88em;
+  cursor: help;
+  text-decoration: none;
+}
+@media (prefers-color-scheme: dark) {
+  mark.ph { background: #2d1f00; color: #fbbf24; border-color: #d97706; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width:640px) {
+  #hero { padding:48px 20px 48px; }
+  section { padding: 48px 0; }
+  .container { padding: 0 16px; }
+  .north-star { padding: 22px 20px; }
+  .ns-metric { font-size: 1.5rem; }
+  .q-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <span class="nav-brand">VAHDAM <span>DTC</span></span>
+  <a class="pill" href="#questions" style="color:var(--text);border-color:var(--border)">🔍 Key Questions</a>
+  <a class="pill p1" href="#s1">⚡ Retention Engine</a>
+  <a class="pill p2" href="#s2">📊 Channel Efficiency</a>
+  <a class="pill p3" href="#s3">🌍 Geo Prioritisation</a>
+  <a class="pill p4" href="#s4">🔄 Subscription Flywheel</a>
+  <a class="pill p5" href="#s5">🎯 Funnel Conversion</a>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-eyebrow">Growth Intelligence Report</div>
+  <h1 class="hero-title">VAHDAM DTC<br><span>Growth Strategy</span></h1>
+  <p class="hero-sub">Data-driven strategy for D2C revenue growth — powered by DuckDB analytics across Shopify, Klaviyo, and WebEngage</p>
+  <div class="hero-pills">
+    <a class="hero-pill" href="#questions" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3)">🔍 Key Questions</a>
+    <a class="hero-pill" href="#s1">⚡ Retention Engine</a>
+    <a class="hero-pill" href="#s2">📊 Channel Efficiency</a>
+    <a class="hero-pill" href="#s3">🌍 Geo Prioritisation</a>
+    <a class="hero-pill" href="#s4">🔄 Subscription Flywheel</a>
+    <a class="hero-pill" href="#s5">🎯 Funnel Conversion</a>
+  </div>
+</div>
+
+<!-- KEY QUESTIONS -->
+<section id="questions" style="background:var(--bg2)">
+<div class="container">
+  <div class="section-label" style="color:var(--blue)">Analytics Playbook</div>
+  <h2 class="section-title">Key Questions This Data Answers</h2>
+  <p class="section-sub">Every metric exists to answer a specific business question. Below are the 18 questions VAHDAM's data layer is built to answer — including 5 cross-source combinations that are only possible when all four data sources are loaded together. Single-source metrics are straightforward; combination metrics are where the real edge is.</p>
+
+  <!-- GROUP A: REVENUE & MARGIN -->
+  <div class="q-group">
+    <div class="q-group-header">
+      <span class="q-group-icon">💰</span>
+      <span class="q-group-title">Revenue &amp; Margin</span>
+      <span class="q-group-sub">4 questions · Metrics 1, 2, 5, 8</span>
+    </div>
+    <div class="q-grid">
+
+      <div class="q-card">
+        <div class="q-question">Is our revenue growing — and which market is driving it?</div>
+        <div class="q-answer">Splits gross sales, discounts, and net sales by country code into US / UK / IN / Rest of World. Shows whether growth is broad-based or propped up by a single geography.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--amber)"></span>Metric 1 — Net Revenue by Market</span>
+          <span class="src-badge src-matrixify">matrixify.orders</span>
+        </div>
+        <div class="q-signal signal-good"><strong>Healthy:</strong> All 3 core markets (US, UK, IN) growing MoM. No single market &gt;60% of total.<br><strong>Watch:</strong> One market declining while others grow — flag for geo strategy review.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-amber" href="#s3">→ Geo Prioritisation strategy</a>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-question">Are we over-reliant on new customers to hit revenue targets?</div>
+        <div class="q-answer">Segments every order into "new" (customer_orders_count = 1) or "returning" and shows the monthly revenue split. If new customers drive &gt;50% of revenue, growth is expensive and fragile — any slowdown in acquisition hits the top line immediately.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--purple)"></span>Metric 2 — New vs Returning Split</span>
+          <span class="src-badge src-matrixify">matrixify.orders</span>
+        </div>
+        <div class="q-signal signal-watch"><strong>Target:</strong> Returning customers &gt;60% of revenue (signals strong retention moat).<br><strong>Red flag:</strong> New customer share creeping above 45% — retention is eroding.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine strategy</a>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-question">What is our actual margin after cost of goods — by product type?</div>
+        <div class="q-answer">Calculates (price − variant_cost) / price × 100 at the line-item level and rolls up by month and product_type. Catches margin erosion from discounting or cost increases before it hits the P&amp;L visibly.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--green)"></span>Metric 5 — Gross Margin %</span>
+          <span class="src-badge src-matrixify">matrixify.order_line_items</span>
+        </div>
+        <div class="q-signal signal-good"><strong>Healthy:</strong> Gross margin stable or improving MoM per product type.<br><strong>Watch:</strong> Gift Sets or bundled SKUs showing lower margin — pricing or COGS review needed.</div>
+        <div class="q-footer">
+          <span style="font-size:.72rem;color:var(--text3)">Standalone — no strategy dependency</span>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-question">Is our average order value trending up, flat, or declining?</div>
+        <div class="q-answer">Monthly AOV with MoM % change. A consistent AOV decline often signals over-reliance on discount-driven campaigns or a product mix shift toward lower-value SKUs — both of which compress margin faster than revenue growth can compensate.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--teal)"></span>Metric 8 — AOV Trend</span>
+          <span class="src-badge src-matrixify">matrixify.orders</span>
+        </div>
+        <div class="q-signal signal-bad"><strong>Alert trigger:</strong> AOV drops &gt;5% MoM — query flags this automatically.<br><strong>Investigate:</strong> Cross-check against Email Revenue % — if email share is high during a drop, Klaviyo sends may be discount-heavy.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-teal" href="#s2">→ Channel Efficiency strategy</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GROUP B: CUSTOMER ECONOMICS -->
+  <div class="q-group">
+    <div class="q-group-header">
+      <span class="q-group-icon">📐</span>
+      <span class="q-group-title">Customer Economics</span>
+      <span class="q-group-sub">4 questions · Metrics 3, 6, 12, Bonus LTV · 2 combinations</span>
+    </div>
+    <div class="q-grid">
+
+      <div class="q-card combo" style="--combo-a:var(--teal);--combo-b:var(--blue)">
+        <div class="combo-tag" style="--combo-a:var(--teal);--combo-b:var(--blue)">⚡ Combination — 2 sources</div>
+        <div class="q-question">Are we paying more to acquire customers than they will ever be worth?</div>
+        <div class="q-answer">LTV:CAC requires joining customer lifetime revenue from <code style="background:var(--bg3);padding:1px 5px;border-radius:3px">matrixify.orders</code> with channel spend from <code style="background:var(--bg3);padding:1px 5px;border-radius:3px">shopify_analytics.marketing_attribution</code>. Neither table alone gives you this. The ratio tells you whether scaling a channel will compound returns or compound losses.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--teal)"></span>Metric 3 — LTV:CAC by Channel</span>
+          <span class="src-badge src-matrixify">matrixify.orders</span>
+          <span class="src-badge src-shopify">shopify_analytics.marketing_attribution</span>
+        </div>
+        <div class="q-signal signal-watch"><strong>Scale:</strong> Channels with LTV:CAC &gt;3:1 — increase budget.<br><strong>Pause:</strong> Channels &lt;2:1 — the unit economics don't work.<br><strong>Watch:</strong> Channels with no CAC data (organic, direct) — estimate via assisted conversions.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-teal" href="#s2">→ Channel Efficiency strategy</a>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-question">What is a VAHDAM customer actually worth over their lifetime — by market?</div>
+        <div class="q-answer">Aggregates all revenue per customer and computes average and median LTV, orders, and AOV — split by shipping country. Median LTV is more useful than average here because a handful of high-CLV customers skew averages significantly in premium DTC.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--amber)"></span>Bonus — LTV by Market</span>
+          <span class="src-badge src-matrixify">matrixify.orders</span>
+        </div>
+        <div class="q-signal signal-good"><strong>Use for:</strong> Setting market-specific CAC ceilings (e.g., if median LTV in UK = $130, max acceptable CAC = $43 at 3:1).<br><strong>Watch:</strong> Large gap between avg and median LTV — signals a small VIP cohort carrying disproportionate revenue.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-amber" href="#s3">→ Geo Prioritisation strategy</a>
+        </div>
+      </div>
+
+      <div class="q-card combo" style="--combo-a:var(--teal);--combo-b:var(--amber)">
+        <div class="combo-tag" style="--combo-a:var(--teal);--combo-b:var(--amber)">⚡ Combination — 2 sources</div>
+        <div class="q-question">Which acquisition channels produce the highest-value customers — not just the most orders?</div>
+        <div class="q-answer">CAC by channel (from Shopify Analytics) only tells you the cost per acquisition. Pairing it with LTV segmented by <code style="background:var(--bg3);padding:1px 5px;border-radius:3px">utm_source</code> from Matrixify orders tells you which channels acquire customers who <em>keep buying</em> vs customers who buy once and disappear. A channel with high CAC but high LTV may still be your best.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--teal)"></span>Metric 6 — CAC by Channel</span>
+          <span class="metric-pill"><span class="dot" style="background:var(--amber)"></span>Bonus — LTV by Channel</span>
+          <span class="src-badge src-shopify">shopify_analytics.acquisition_metrics</span>
+          <span class="src-badge src-matrixify">matrixify.orders (utm_source)</span>
+        </div>
+        <div class="q-signal signal-watch"><strong>Action:</strong> Sort channels by LTV:CAC, not raw CAC. An influencer channel with $60 CAC but $280 LTV is 4.7× — keep it. A Google channel with $25 CAC but $60 LTV is 2.4× — review it.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-teal" href="#s2">→ Channel Efficiency strategy</a>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-question">How long does it take for a new customer to make a second purchase?</div>
+        <div class="q-answer">Ranks each customer's orders chronologically and measures the gap in days between order 1 and order 2. The median value tells you when to fire the post-purchase re-engagement flow — trigger it before the median, not after. Split by market and UTM source to catch channel-specific differences.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--purple)"></span>Metric 12 — Time to 2nd Purchase</span>
+          <span class="src-badge src-matrixify">matrixify.orders</span>
+        </div>
+        <div class="q-signal signal-watch"><strong>From your data:</strong> Once you run Metric 12, your median days-to-2nd defines the benchmark. Below <mark class="ph" title="Run Metric 12 against real orders export">[ YOUR MEDIAN T2P ]</mark> = strong; above 90 = flow is firing too late.<br><strong>Action:</strong> Set Klaviyo day-N post-purchase trigger to median_days − 7.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine strategy</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GROUP C: RETENTION -->
+  <div class="q-group">
+    <div class="q-group-header">
+      <span class="q-group-icon">🔁</span>
+      <span class="q-group-title">Retention &amp; Churn</span>
+      <span class="q-group-sub">5 questions · Metrics 4, 11, 13, 14, 15 · 1 combination</span>
+    </div>
+    <div class="q-grid">
+
+      <div class="q-card">
+        <div class="q-question">What % of new buyers place a second order within 90 days?</div>
+        <div class="q-answer">For each cohort month (customers who made their first-ever purchase in month X), calculates the % who returned within 90 days. The cohort view is critical — a blended repeat rate hides whether the rate is improving or declining over time as acquisition channels shift.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--purple)"></span>Metric 4 — Repeat Purchase Rate 90d</span>
+          <span class="src-badge src-matrixify">matrixify.orders</span>
+        </div>
+        <div class="q-signal signal-good"><strong>Strong:</strong> 90d repeat rate &gt;<mark class="ph" title="Consumable DTC benchmark; your actual target should be set from your own cohort data once loaded">[ 25% — INDUSTRY BENCHMARK ]</mark> = healthy DTC retention.<br><strong>Weak:</strong> Rate trending down across recent cohorts — investigate if a product, acquisition channel, or flow changed.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine strategy</a>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-question">Are customers still buying at 30, 60, and 90 days after first purchase?</div>
+        <div class="q-answer">More granular than the 90-day repeat rate — shows where the drop-off happens. If 30-day retention is fine but 60-day is poor, the second-purchase window closes between weeks 4 and 8. That's when your flow needs to fire, not at day 90.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--purple)"></span>Metric 11 — Cohort Retention 30/60/90d</span>
+          <span class="src-badge src-matrixify">matrixify.orders</span>
+        </div>
+        <div class="q-signal signal-watch"><strong>Read together with Metric 12:</strong> If median time-to-2nd is 40 days but 30d retention is &lt;10%, customers are taking longer — not churning. If 90d retention = 30d retention, no one returns after the first window.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine strategy</a>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-question">How many of our active customers are drifting toward churn right now?</div>
+        <div class="q-answer">Klaviyo's predictive model scores every profile as low / medium / high churn risk / winback. The distribution tells you the scale of the retention problem before it shows up in revenue. High + winback combined is your actionable "at-risk" segment.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--purple)"></span>Metric 13 — Churn Risk Distribution</span>
+          <span class="src-badge src-klaviyo">klaviyo.profiles</span>
+        </div>
+        <div class="q-signal signal-bad"><strong>Act when:</strong> High + winback &gt;<mark class="ph" title="Run Metric 13 against your real Klaviyo profiles export — your actual distribution will set the right threshold">[ 25% — ROUGH BENCHMARK ]</mark> of active list.<br><strong>Note:</strong> These thresholds are Klaviyo's predictions, not derived from your own order history. Cross-validate against Metric 4 cohorts.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine strategy</a>
+        </div>
+      </div>
+
+      <div class="q-card combo" style="--combo-a:var(--purple);--combo-b:var(--coral)">
+        <div class="combo-tag" style="--combo-a:var(--purple);--combo-b:var(--coral)">⚡ Combination — 2 sources</div>
+        <div class="q-question">How much future revenue will we lose if we don't act on churn now?</div>
+        <div class="q-answer">At-risk revenue = SUM(predicted_clv_1y) filtered to churn_risk IN ('high','winback'). This combines Klaviyo's predictive CLV model with its churn risk score to put a dollar figure on the cost of inaction — making the case for win-back investment concrete and quantifiable. Break it down by country to see where the most revenue is at risk.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--purple)"></span>Metric 14 — At-Risk Revenue</span>
+          <span class="src-badge src-klaviyo">klaviyo.profiles (churn_risk × predicted_clv_1y)</span>
+        </div>
+        <div class="q-signal signal-bad"><strong>Frame it this way:</strong> "We have $X in predicted 1-year CLV from customers who are likely to churn. A 30% recovery rate from win-back flows = $Y in recovered revenue."<br><strong>Caveat:</strong> predicted_clv_1y is Klaviyo's model output — accuracy depends on how much purchase history Klaviyo has synced from Shopify.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine strategy</a>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-question">Which products are best at bringing customers back — regardless of what they bought?</div>
+        <div class="q-answer">For each SKU, calculates the % of first-time buyers of that product who made any subsequent purchase within 90 days. These are your "retention anchor" products — the ones that open the relationship. Products with high repeat rates should be prioritised for acquisition and subscription conversion, not just for margin.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--coral)"></span>Metric 15 — Product Repeat Rate</span>
+          <span class="src-badge src-matrixify">matrixify.order_line_items + orders</span>
+        </div>
+        <div class="q-signal signal-good"><strong>Use for:</strong> Identify top-3 "gateway SKUs" → run paid acquisition to those products specifically → higher lifetime cohort value from the start.<br><strong>Combine with:</strong> Subscription Mix — if a high-repeat SKU has low subscription penetration, that's your next conversion target.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-coral" href="#s4">→ Subscription Flywheel strategy</a>
+          <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GROUP D: CHANNEL & EMAIL -->
+  <div class="q-group">
+    <div class="q-group-header">
+      <span class="q-group-icon">📧</span>
+      <span class="q-group-title">Channel &amp; Email Efficiency</span>
+      <span class="q-group-sub">3 questions · Metrics 7, 3+6 · 1 combination</span>
+    </div>
+    <div class="q-grid">
+
+      <div class="q-card combo" style="--combo-a:var(--purple);--combo-b:var(--green)">
+        <div class="combo-tag" style="--combo-a:var(--purple);--combo-b:var(--green)">⚡ Combination — 2 sources</div>
+        <div class="q-question">How much of our total revenue can we directly attribute to Klaviyo?</div>
+        <div class="q-answer">Joins Klaviyo's <code style="background:var(--bg3);padding:1px 5px;border-radius:3px">revenue_attributed</code> (from klaviyo.campaigns) against total net sales from <code style="background:var(--bg3);padding:1px 5px;border-radius:3px">shopify_analytics.revenue_metrics</code>. The ratio tells you how hard your email list is working. Also breaks down by campaign vs flow — flows should outperform campaigns over time because they're always-on and targeted.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--purple)"></span>Metric 7 — Email Revenue %</span>
+          <span class="src-badge src-klaviyo">klaviyo.campaigns</span>
+          <span class="src-badge src-shopify">shopify_analytics.revenue_metrics</span>
+        </div>
+        <div class="q-signal signal-watch"><strong>Target:</strong> <mark class="ph" title="Mature DTC email programs; your starting point will be lower — treat this as a 12-month goal, not an immediate expectation">[ 30–40% — INDUSTRY BENCHMARK ]</mark> of net sales attributed to Klaviyo.<br><strong>Gap:</strong> Below 20% = significant flows are missing or poorly sequenced.<br><strong>Caveat:</strong> Klaviyo uses last-touch attribution with a 5-day window by default — this overstates email influence when other channels are active.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-teal" href="#s2">→ Channel Efficiency strategy</a>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-question">Are we investing in acquisition channels that actually generate profitable returns?</div>
+        <div class="q-answer">CAC by channel shows cost and conversion rate. Combined with the LTV:CAC query (Metric 3), this becomes a full profitability screen per channel. Run it monthly and reallocate budget from any channel below 3:1 to channels above it — or to email/organic where marginal cost is near zero.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--teal)"></span>Metric 6 — CAC by Channel</span>
+          <span class="metric-pill"><span class="dot" style="background:var(--teal)"></span>Metric 3 — LTV:CAC</span>
+          <span class="src-badge src-shopify">shopify_analytics.acquisition_metrics</span>
+        </div>
+        <div class="q-signal signal-bad"><strong>Reallocate trigger:</strong> Any channel with LTV:CAC &lt;2:1 for 2 consecutive months → pause or significantly reduce budget.<br><strong>Note:</strong> CAC from Shopify Analytics uses session-based attribution; treat it as a proxy, not ground truth.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-teal" href="#s2">→ Channel Efficiency strategy</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GROUP E: CONVERSION & MIX -->
+  <div class="q-group">
+    <div class="q-group-header">
+      <span class="q-group-icon">🎯</span>
+      <span class="q-group-title">Conversion &amp; Revenue Mix</span>
+      <span class="q-group-sub">4 questions · Metrics 9, 10, 15+10 · 1 combination</span>
+    </div>
+    <div class="q-grid">
+
+      <div class="q-card">
+        <div class="q-question">Where exactly in the checkout funnel are we losing customers?</div>
+        <div class="q-answer">WebEngage event_summary rolls up daily event counts for Product Viewed → Added To Cart → Checkout Created → Order Created. Aggregated by week, it pinpoints which stage has the biggest drop-off. Unlike Shopify's native funnel, this captures cross-session and cross-device behaviour.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--blue)"></span>Metric 9 — Checkout Conversion Rate</span>
+          <span class="src-badge src-webengage">webengage.event_summary</span>
+        </div>
+        <div class="q-signal signal-watch"><strong>Your baseline:</strong> Run Metric 9 against your real WebEngage export — <mark class="ph" title="Run Metric 9, most recent 4 weeks average">[ YOUR ATC→CHK RATE ]</mark> cart-to-checkout, <mark class="ph" title="Run Metric 9, most recent 4 weeks average">[ YOUR CHK→ORDER RATE ]</mark> checkout-to-order.<br><strong>Alert:</strong> Any stage drops &gt;5% WoW → query flags it automatically.<br><strong>Investigate by:</strong> Device type (mobile vs desktop gap), market (US vs UK checkout friction).</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-blue" href="#s5">→ Funnel Conversion strategy</a>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-question">What share of our revenue comes from subscription vs one-time orders?</div>
+        <div class="q-answer">Identifies subscription orders by checking whether any line item's <code style="background:var(--bg3);padding:1px 5px;border-radius:3px">properties</code> JSON contains "subscription" or "frequency". This approach depends on your subscription app writing these properties to the line item — verify this against a known subscription order before trusting the output.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--coral)"></span>Metric 10 — Subscription Mix %</span>
+          <span class="src-badge src-matrixify">matrixify.order_line_items + orders</span>
+        </div>
+        <div class="q-signal signal-good"><strong>Target:</strong> Push toward <mark class="ph" title="Set based on current mix from Metric 10 + a realistic 12-month growth goal">[ YOUR TARGET SUB MIX % ]</mark> subscription mix for revenue predictability.<br><strong>Current:</strong> <mark class="ph" title="python run_all.py → duckdb vahdam_dtc.duckdb → .read queries/metrics.sql — M10 section">[ RUN METRIC 10 ]</mark> (from your real Matrixify export).<br><strong>Watch:</strong> Month where subscription % drops sharply = subscriber churn spike → investigate pauses.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-coral" href="#s4">→ Subscription Flywheel strategy</a>
+        </div>
+      </div>
+
+      <div class="q-card combo" style="--combo-a:var(--coral);--combo-b:var(--purple)">
+        <div class="combo-tag" style="--combo-a:var(--coral);--combo-b:var(--purple)">⚡ Combination — 2 metrics</div>
+        <div class="q-question">Which SKUs have high repeat purchase rates but low subscription penetration — and should be converted?</div>
+        <div class="q-answer">Cross Metric 15 (Product Repeat Rate) against Metric 10 (Subscription Mix by SKU). A product where 25% of buyers repurchase within 90 days but only 5% are on subscription is a proven consumable that customers haven't been offered the subscription option for. These are your highest-conviction subscription conversion candidates.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--coral)"></span>Metric 15 — Product Repeat Rate</span>
+          <span class="metric-pill"><span class="dot" style="background:var(--purple)"></span>Metric 10 — Sub Mix by SKU</span>
+          <span class="src-badge src-matrixify">matrixify.order_line_items + orders</span>
+        </div>
+        <div class="q-signal signal-good"><strong>Action:</strong> Export this list → create a Klaviyo segment of buyers of these SKUs who are NOT subscribed → enrol in subscription offer flow day 7 post-purchase.<br><strong>Expected outcome:</strong> <mark class="ph" title="Post-purchase subscription offer conversion rate benchmark for DTC consumables">[ 8–15% — INDUSTRY BENCHMARK ]</mark> subscription conversion rate on this warm audience.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-coral" href="#s4">→ Subscription Flywheel strategy</a>
+        </div>
+      </div>
+
+      <div class="q-card combo" style="--combo-a:var(--blue);--combo-b:var(--teal)">
+        <div class="combo-tag" style="--combo-a:var(--blue);--combo-b:var(--teal)">⚡ Combination — 2 sources</div>
+        <div class="q-question">Is a drop in checkout conversion causing revenue to fall, or is it a traffic quality problem?</div>
+        <div class="q-answer">When revenue drops, root cause splits two ways: less traffic converting (funnel problem) or worse traffic arriving (acquisition quality problem). Running Metric 9 (WebEngage checkout funnel) alongside Metric 6 (acquisition channel mix from Shopify Analytics) in the same week separates them. If CVR is stable but a low-quality channel suddenly dominates traffic, the fix is media — not UX.</div>
+        <div class="q-metrics">
+          <span class="metric-pill"><span class="dot" style="background:var(--blue)"></span>Metric 9 — Checkout Conversion</span>
+          <span class="metric-pill"><span class="dot" style="background:var(--teal)"></span>Metric 6 — Acquisition Channel Mix</span>
+          <span class="src-badge src-webengage">webengage.event_summary</span>
+          <span class="src-badge src-shopify">shopify_analytics.acquisition_metrics</span>
+        </div>
+        <div class="q-signal signal-watch"><strong>Diagnosis tree:</strong> CVR down + channel mix stable → UX/pricing issue. CVR stable + new low-quality channel dominant → media problem. Both down → broader demand signal — check seasonality or competitor activity.</div>
+        <div class="q-footer">
+          <a class="q-detail-link lk-blue" href="#s5">→ Funnel Conversion strategy</a>
+          <a class="q-detail-link lk-teal" href="#s2">→ Channel Efficiency</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<div>
+      <div style="font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:4px">All numbers in this document are from synthetic seed data</div>
+      <div style="font-size:.8rem;color:var(--text2);line-height:1.6">The thresholds (LTV:CAC 3:1, email 30–40%, CAC $45, subscriber LTV 4×) are industry DTC benchmarks — not derived from VAHDAM's actual data. Run <code style="background:var(--border);padding:1px 5px;border-radius:3px">python run_all.py</code> with your real Matrixify, Klaviyo, and WebEngage exports, then re-read <code style="background:var(--border);padding:1px 5px;border-radius:3px">queries/metrics.sql</code> against <code style="background:var(--border);padding:1px 5px;border-radius:3px">vahdam_dtc.duckdb</code> to replace every number with actuals before using this document with stakeholders.</div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 1: NORTH STAR + METRICS -->
+<section id="overview">
+<div class="container">
+  <div class="section-label" style="color:var(--purple)">North Star + Metrics Framework</div>
+  <h2 class="section-title">What We Measure &amp; Why</h2>
+  <p class="section-sub">15 metrics organised into a three-tier pyramid — from business health signals reviewed weekly, to deep retention intelligence reviewed monthly.</p>
+
+  <div class="north-star">
+    <div class="ns-icon">⭐</div>
+    <div>
+      <div class="ns-label">North Star Metric</div>
+      <div class="ns-metric">Customer Lifetime Value (LTV)</div>
+      <div class="ns-desc">Every strategy decision optimises for LTV. A customer who buys twice is worth 3–5× one who buys once. Growing average LTV is the compounding advantage that makes VAHDAM defensible at scale.</div>
+    </div>
+  </div>
+
+  <div class="pyramid">
+    <div class="pyramid-tier t1">
+      <div class="tier-header">
+        <span class="tier-label">Tier 1 — Business Health</span>
+        <span class="tier-freq">Weekly Review</span>
+      </div>
+      <div class="metric-grid">
+        <div class="metric-item"><span class="src-badge src-matrixify">Matrixify</span> Net Revenue by Market</div>
+        <div class="metric-item"><span class="src-badge src-matrixify">Matrixify</span> New vs Returning Mix</div>
+        <div class="metric-item"><span class="src-badge src-shopify">Shopify</span> LTV:CAC by Channel</div>
+        <div class="metric-item"><span class="src-badge src-matrixify">Matrixify</span> Repeat Purchase Rate 90d</div>
+        <div class="metric-item"><span class="src-badge src-matrixify">Matrixify</span> Gross Margin %</div>
+      </div>
+    </div>
+    <div class="pyramid-tier t2">
+      <div class="tier-header">
+        <span class="tier-label">Tier 2 — Growth Levers</span>
+        <span class="tier-freq">Weekly Review</span>
+      </div>
+      <div class="metric-grid">
+        <div class="metric-item"><span class="src-badge src-shopify">Shopify</span> CAC by Channel</div>
+        <div class="metric-item"><span class="src-badge src-klaviyo">Klaviyo</span> Email Revenue %</div>
+        <div class="metric-item"><span class="src-badge src-matrixify">Matrixify</span> AOV Trend MoM</div>
+        <div class="metric-item"><span class="src-badge src-webengage">WebEngage</span> Checkout Conversion</div>
+        <div class="metric-item"><span class="src-badge src-matrixify">Matrixify</span> Subscription Mix %</div>
+      </div>
+    </div>
+    <div class="pyramid-tier t3">
+      <div class="tier-header">
+        <span class="tier-label">Tier 3 — Retention Intelligence</span>
+        <span class="tier-freq">Monthly Review</span>
+      </div>
+      <div class="metric-grid">
+        <div class="metric-item"><span class="src-badge src-matrixify">Matrixify</span> Cohort Retention 30/60/90d</div>
+        <div class="metric-item"><span class="src-badge src-matrixify">Matrixify</span> Time to 2nd Purchase</div>
+        <div class="metric-item"><span class="src-badge src-klaviyo">Klaviyo</span> Churn Risk Distribution</div>
+        <div class="metric-item"><span class="src-badge src-klaviyo">Klaviyo</span> At-Risk Revenue</div>
+        <div class="metric-item"><span class="src-badge src-matrixify">Matrixify</span> Product Repeat Rate</div>
+        <div class="metric-item"><span class="src-badge src-matrixify">Matrixify</span> LTV by Market</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 2: RETENTION ENGINE -->
+<section id="s1">
+<div class="container strategy-section s1">
+  <div class="section-label" style="color:var(--purple)">Strategy 1</div>
+  <h2 class="section-title">Retention-First Revenue Engine</h2>
+  <p class="section-sub">Acquire less expensively by retaining more effectively. VAHDAM's repeat purchase rate signals that retention — not acquisition — is the primary growth lever.</p>
+
+  <div class="why-box">
+    <h4>Why This Strategy</h4>
+    <p>VAHDAM already has a strong repeat purchase signal. The opportunity is to systematise what's happening organically: identify who's about to churn before they do, segment by predicted lifetime value, and intervene at the right moment with the right offer. Klaviyo's predictive CLV and churn risk scores make this operationally feasible without a data science team.</p>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px">Recovery Workflow</h4>
+  <div class="workflow">
+    <div class="wf-box accent-purple">DuckDB<br>churn query</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">Identify<br>churn cohort</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">Cross-ref<br>predicted CLV</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">Segment by<br>value tier</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box accent-purple">Trigger<br>Klaviyo flow</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box accent-purple">Recovered<br>revenue</div>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px">Decision Tree</h4>
+  <div class="dtree">
+    <div class="dt-card">
+      <div class="dt-if">If</div>
+      <div class="dt-condition">High churn risk + predicted CLV &gt; <mark class="ph" title="Run: SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY predicted_clv_1y) FROM klaviyo.profiles">[ YOUR HIGH-VALUE CLV CUTOFF ]</mark></div>
+      <div class="dt-then">Then</div>
+      <div class="dt-action">Personal win-back: <mark class="ph" title="e.g. 15–25% off + free shipping — depends on your margin structure on high-CLV SKUs">[ YOUR WIN-BACK OFFER ]</mark>. Assign to VIP rep flow. High-touch, high-value worth the margin cost.</div>
+    </div>
+    <div class="dt-card">
+      <div class="dt-if">If</div>
+      <div class="dt-condition">High churn risk + predicted CLV &lt; <mark class="ph" title="Same threshold as above — your P75 predicted_clv_1y from Klaviyo">[ YOUR HIGH-VALUE CLV CUTOFF ]</mark></div>
+      <div class="dt-then">Then</div>
+      <div class="dt-action">Low-cost reactivation: editorial content email, no discount. Preserve margin. Let content do the work.</div>
+    </div>
+    <div class="dt-card">
+      <div class="dt-if">If</div>
+      <div class="dt-condition">Medium churn + days since last order &gt; 60</div>
+      <div class="dt-then">Then</div>
+      <div class="dt-action">Product recommendation based on last SKU purchased. "You loved X — try Y." Curiosity-led re-engagement, no discount.</div>
+    </div>
+    <div class="dt-card">
+      <div class="dt-if">If</div>
+      <div class="dt-condition">Time to 2nd purchase &gt; <mark class="ph" title="Run Metric 12 in queries/metrics.sql → use the median_days value">[ YOUR MEDIAN T2P ]</mark> average</div>
+      <div class="dt-then">Then</div>
+      <div class="dt-action">Shorten the window. Trigger a day-<mark class="ph" title="Run Metric 12 → subtract 7 days from your actual median_days">[ MEDIAN T2P − 7 ]</mark> post-purchase educational flow. Show use cases, brew guides, complementary SKUs.</div>
+    </div>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:12px">Metrics Used</h4>
+  <div class="metrics-strip">
+    <span class="metric-badge badge-purple">Churn Risk Distribution</span>
+    <span class="metric-badge badge-purple">At-Risk Revenue</span>
+    <span class="metric-badge badge-purple">Time to 2nd Purchase</span>
+    <span class="metric-badge badge-purple">Cohort Retention 90d</span>
+    <span class="metric-badge badge-gray">Klaviyo Flow Conversion</span>
+  </div>
+
+  <div class="sql-block">
+    <h5>Key DuckDB Query — Identify High-Value Churn Targets</h5>
+    <pre><span class="cm">-- Customers: high churn risk + CLV > $200, no order in 60+ days</span>
+<span class="kw">SELECT</span>
+    p.profile_id,
+    p.email,
+    p.churn_risk,
+    p.predicted_clv_1y,
+    p.historic_number_of_orders,
+    <span class="fn">MAX</span>(o.processed_at) <span class="kw">AS</span> last_order_date,
+    <span class="fn">DATEDIFF</span>(<span class="str">'day'</span>, <span class="fn">MAX</span>(o.processed_at), <span class="fn">CURRENT_DATE</span>) <span class="kw">AS</span> days_since_order
+<span class="kw">FROM</span> klaviyo.profiles p
+<span class="kw">LEFT JOIN</span> matrixify.orders o
+    <span class="kw">ON</span> o.email <span class="op">=</span> p.email
+    <span class="kw">AND</span> o.financial_status <span class="op">NOT IN</span> (<span class="str">'refunded'</span>, <span class="str">'voided'</span>)
+<span class="kw">WHERE</span> p.churn_risk <span class="op">IN</span> (<span class="str">'high'</span>, <span class="str">'winback'</span>)
+  <span class="kw">AND</span> p.predicted_clv_1y <span class="op">&gt;</span> <span class="num">200</span>
+<span class="kw">GROUP BY</span> <span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>,<span class="num">5</span>
+<span class="kw">HAVING</span> <span class="fn">DATEDIFF</span>(<span class="str">'day'</span>, <span class="fn">MAX</span>(o.processed_at), <span class="fn">CURRENT_DATE</span>) <span class="op">&gt;</span> <span class="num">60</span> <span class="cm">-- replace: your lapse window in days (e.g. avg days between orders × 1.5)</span>
+<span class="kw">ORDER BY</span> p.predicted_clv_1y <span class="kw">DESC</span>
+<span class="kw">LIMIT</span> <span class="num">500</span>;</pre>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 3: CHANNEL EFFICIENCY -->
+<section id="s2" style="background:var(--bg2)">
+<div class="container strategy-section s2">
+  <div class="section-label" style="color:var(--teal)">Strategy 2</div>
+  <h2 class="section-title">Channel Efficiency Reallocation</h2>
+  <p class="section-sub">Most DTC brands over-invest in paid, under-invest in owned. Klaviyo should generate 30–40% of revenue — if it doesn't, that gap is free money left on the table.</p>
+
+  <div class="why-box">
+    <h4>Why This Strategy</h4>
+    <p>Paid channels have a built-in ceiling — as spend increases, marginal efficiency drops. Email has near-zero marginal cost and compounds: a list built today generates revenue for years. VAHDAM's Klaviyo investment should be benchmarked against total net sales monthly, and any gap below 30% should trigger a flow audit before increasing paid spend.</p>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px">Monthly Budget Reallocation Workflow</h4>
+  <div class="workflow">
+    <div class="wf-box accent-teal">Shopify<br>Analytics</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">CAC by<br>channel</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">LTV by<br>channel cohort</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">LTV:CAC<br>ratio</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box accent-teal">&gt;<mark class="ph" title="Typically 3:1 — set based on your reinvestment rate and payback window">[ YOUR SCALE THRESHOLD ]</mark> → increase<br>&lt;<mark class="ph" title="Typically 2:1 — at this level you are not covering cost">[ YOUR PAUSE THRESHOLD ]</mark> → pause</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box accent-teal">Higher blended<br>ROAS</div>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px">Email Revenue Gap Workflow</h4>
+  <div class="workflow">
+    <div class="wf-box accent-teal">Klaviyo<br>campaigns</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">Email revenue<br>% of total</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">If &lt; <mark class="ph" title="Set your own floor — typically 25-30% for a healthy Klaviyo setup">[ YOUR EMAIL FLOOR % ]</mark><br>→ gap identified</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">Audit missing<br>flows</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box accent-teal">Build &amp; activate<br>flows</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box accent-teal">Incremental<br>revenue</div>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px">Target Benchmarks</h4>
+  <div class="card" style="margin-bottom:32px;overflow:auto">
+    <table>
+      <thead><tr><th>Metric</th><th>Floor / Target</th><th>Action if Below</th></tr></thead>
+      <tbody>
+        <tr><td>LTV:CAC ratio (all paid channels)</td><td><strong><mark class="ph" title="Standard DTC floor; set your own based on payback period and growth targets">[ 3:1 — INDUSTRY BENCHMARK ]</mark></strong></td><td>Reduce spend on underperforming channel; reallocate to email or top performer</td></tr>
+        <tr><td>Email revenue % of net sales</td><td><strong><mark class="ph" title="Mature email programs drive 30-40% of DTC revenue; your baseline will vary by list size and flow coverage">[ 30–40% — INDUSTRY BENCHMARK ]</mark></strong></td><td>Audit flow coverage: welcome, abandon cart, post-purchase, win-back, browse abandon must all be live</td></tr>
+        <tr><td>Klaviyo CTOR (click-to-open rate)</td><td><strong><mark class="ph" title="Industry average CTOR for DTC email; check your Klaviyo account → Analytics → Benchmarks for category comparison">[ 15%+ — INDUSTRY BENCHMARK ]</mark></strong></td><td>Segment sends more tightly; test subject lines; review list hygiene</td></tr>
+        <tr><td>Revenue per Klaviyo recipient</td><td><strong><mark class="ph" title="Run: SELECT SUM(revenue_attributed)/SUM(recipients) FROM klaviyo.campaigns">[ $0.10+ — INDUSTRY BENCHMARK ]</mark></strong></td><td>Improve personalisation; introduce dynamic product recommendations</td></tr>
+        <tr><td>Paid CAC — US market</td><td><strong><mark class="ph" title="Set as: median LTV (US) from Bonus LTV by Market query ÷ your target LTV:CAC ratio">[ YOUR US CAC CEILING ]</mark></strong></td><td>Pause high-CAC ad sets; consolidate to best-performing creative</td></tr>
+        <tr><td>Paid CAC — UK market</td><td><strong><mark class="ph" title="Set as: median LTV (UK) from Bonus LTV by Market query ÷ your target LTV:CAC ratio">[ YOUR UK CAC CEILING ]</mark></strong></td><td>UK CPMs higher; consider retention-first approach, reduce new acquisition spend</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:12px">Metrics Used</h4>
+  <div class="metrics-strip">
+    <span class="metric-badge badge-teal">LTV:CAC by Channel</span>
+    <span class="metric-badge badge-teal">CAC by Channel</span>
+    <span class="metric-badge badge-teal">Email Revenue %</span>
+    <span class="metric-badge badge-gray">Klaviyo CTOR</span>
+    <span class="metric-badge badge-gray">Revenue per Recipient</span>
+  </div>
+
+  <div class="sql-block">
+    <h5>Key DuckDB Query — LTV:CAC by Channel</h5>
+    <pre><span class="cm">-- LTV:CAC ratio per acquisition channel — flag below 3:1</span>
+<span class="kw">WITH</span> customer_ltv <span class="kw">AS</span> (
+    <span class="kw">SELECT</span>
+        <span class="fn">COALESCE</span>(utm_source, <span class="str">'organic'</span>) <span class="kw">AS</span> channel,
+        customer_id,
+        <span class="fn">SUM</span>(total_price)              <span class="kw">AS</span> lifetime_value
+    <span class="kw">FROM</span> matrixify.orders
+    <span class="kw">WHERE</span> financial_status <span class="op">NOT IN</span> (<span class="str">'refunded'</span>, <span class="str">'voided'</span>)
+      <span class="kw">AND</span> cancelled_at <span class="kw">IS NULL</span>
+    <span class="kw">GROUP BY</span> <span class="num">1</span>, <span class="num">2</span>
+),
+cac_data <span class="kw">AS</span> (
+    <span class="kw">SELECT</span> channel,
+           <span class="fn">SUM</span>(spend)         <span class="kw">AS</span> total_spend,
+           <span class="fn">SUM</span>(new_customers) <span class="kw">AS</span> new_customers
+    <span class="kw">FROM</span> shopify_analytics.marketing_attribution
+    <span class="kw">GROUP BY</span> channel
+)
+<span class="kw">SELECT</span>
+    l.channel,
+    <span class="fn">ROUND</span>(<span class="fn">AVG</span>(l.lifetime_value), <span class="num">2</span>)                          <span class="kw">AS</span> avg_ltv,
+    <span class="fn">ROUND</span>(c.total_spend <span class="op">/</span> <span class="fn">NULLIF</span>(c.new_customers, <span class="num">0</span>), <span class="num">2</span>)  <span class="kw">AS</span> cac,
+    <span class="fn">ROUND</span>(<span class="fn">AVG</span>(l.lifetime_value) <span class="op">/</span>
+          <span class="fn">NULLIF</span>(c.total_spend <span class="op">/</span> <span class="fn">NULLIF</span>(c.new_customers,<span class="num">0</span>),<span class="num">0</span>), <span class="num">2</span>) <span class="kw">AS</span> ltv_cac_ratio,
+    <span class="kw">CASE WHEN</span> <span class="fn">AVG</span>(l.lifetime_value) <span class="op">/</span>
+              <span class="fn">NULLIF</span>(c.total_spend <span class="op">/</span> <span class="fn">NULLIF</span>(c.new_customers,<span class="num">0</span>),<span class="num">0</span>) <span class="op">&lt;</span> <span class="num">3</span>
+         <span class="kw">THEN</span> <span class="str">'⚠ BELOW 3:1 — REVIEW'</span> <span class="cm">-- replace 3 with your minimum acceptable LTV:CAC ratio</span>
+         <span class="kw">ELSE</span> <span class="str">'✓ OK'</span> <span class="kw">END</span>                                        <span class="kw">AS</span> flag
+<span class="kw">FROM</span> customer_ltv l
+<span class="kw">LEFT JOIN</span> cac_data c <span class="kw">USING</span> (channel)
+<span class="kw">GROUP BY</span> l.channel, c.total_spend, c.new_customers
+<span class="kw">ORDER BY</span> ltv_cac_ratio <span class="kw">DESC NULLS LAST</span>;</pre>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 4: GEO -->
+<section id="s3">
+<div class="container strategy-section s3">
+  <div class="section-label" style="color:var(--amber)">Strategy 3</div>
+  <h2 class="section-title">Geo-Market LTV Prioritisation</h2>
+  <p class="section-sub">US and UK customers have distinct LTV profiles and different price sensitivities. Market-specific CAC thresholds drive far better budget allocation than blended averages.</p>
+
+  <div class="why-box">
+    <h4>Why This Strategy</h4>
+    <p>VAHDAM operates across three meaningful markets with meaningfully different economics. UK customers show slightly lower AOV but strong repeat frequency. US customers show higher AOV. IN customers have the lowest absolute LTV but organic acquisition cost near zero. Each market warrants a different playbook — conflating them into a blended average destroys insight.</p>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px">Quarterly Geo Reallocation Workflow</h4>
+  <div class="workflow">
+    <div class="wf-box accent-amber">matrixify<br>.orders</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">LTV by<br>country</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">AOV + order<br>frequency/market</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">Market CAC<br>ceiling</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box accent-amber">Budget<br>reallocation</div>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px">Market Playbooks</h4>
+  <div class="card-grid cols3" style="margin-bottom:32px">
+    <div class="card" style="border-top:3px solid var(--amber)">
+      <div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);margin-bottom:10px">🇺🇸 United States</div>
+      <div style="font-size:1.5rem;font-weight:900;margin-bottom:4px">Primary</div>
+      <div style="font-size:.82rem;color:var(--text2);margin-bottom:14px">Largest revenue share (<mark class="ph" title="Run Metric 1 → US net_sales / total net_sales × 100">[ YOUR US REV % ]</mark>), highest AOV. Highest competition for paid.</div>
+      <ul style="font-size:.82rem;color:var(--text2);list-style:none;padding:0">
+        <li style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--amber)">→</span>Aggressive new acquisition while LTV:CAC &gt; 3:1</li>
+        <li style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--amber)">→</span>Full flow coverage in Klaviyo</li>
+        <li style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--amber)">→</span>Subscription conversion priority</li>
+        <li style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--amber)">→</span>CAC ceiling: <mark class="ph" title="= median LTV (US) ÷ 3 — run: SELECT MEDIAN(lifetime_revenue) FROM ... WHERE market='US'">[ YOUR US CAC CEILING ]</mark></li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:3px solid var(--teal)">
+      <div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:10px">🇬🇧 United Kingdom</div>
+      <div style="font-size:1.5rem;font-weight:900;margin-bottom:4px">Retention-First</div>
+      <div style="font-size:.82rem;color:var(--text2);margin-bottom:14px"><mark class="ph" title="Run Metric 1 → GB net_sales / total net_sales × 100">[ YOUR UK REV % ]</mark> revenue share. Strong tea culture = high repeat propensity. CPMs higher than US.</div>
+      <ul style="font-size:.82rem;color:var(--text2);list-style:none;padding:0">
+        <li style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--teal)">→</span>Reduce new acquisition paid spend</li>
+        <li style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--teal)">→</span>Prioritise Klaviyo retention flows</li>
+        <li style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--teal)">→</span>UK-specific copy (£ pricing, heritage)</li>
+        <li style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--teal)">→</span>CAC ceiling: <mark class="ph" title="= median LTV (UK) ÷ 3 — run Bonus LTV by Market query, UK row">[ YOUR UK CAC CEILING ]</mark></li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:3px solid var(--purple)">
+      <div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--purple);margin-bottom:10px">🇮🇳 India</div>
+      <div style="font-size:1.5rem;font-weight:900;margin-bottom:4px">Organic Only</div>
+      <div style="font-size:.82rem;color:var(--text2);margin-bottom:14px"><mark class="ph" title="Run Metric 1 → IN net_sales / total net_sales × 100">[ YOUR IN REV % ]</mark> revenue share, lowest AOV in absolute $. Price-sensitive market.</div>
+      <ul style="font-size:.82rem;color:var(--text2);list-style:none;padding:0">
+        <li style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--purple)">→</span>Zero paid acquisition spend</li>
+        <li style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--purple)">→</span>SEO + organic social only</li>
+        <li style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--purple)">→</span>Gifting + corporate channels</li>
+        <li style="padding:4px 0;display:flex;gap:8px"><span style="color:var(--purple)">→</span>Monitor LTV trend quarterly</li>
+      </ul>
+    </div>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:12px">Metrics Used</h4>
+  <div class="metrics-strip">
+    <span class="metric-badge badge-amber">LTV by Market</span>
+    <span class="metric-badge badge-amber">Net Revenue by Market</span>
+    <span class="metric-badge badge-amber">AOV by Market</span>
+    <span class="metric-badge badge-amber">Repeat Rate by Market</span>
+  </div>
+
+  <div class="sql-block">
+    <h5>Key DuckDB Query — LTV by Market</h5>
+    <pre><span class="cm">-- Per-market LTV, AOV, order frequency, repeat rate</span>
+<span class="kw">WITH</span> customer_stats <span class="kw">AS</span> (
+    <span class="kw">SELECT</span>
+        customer_id,
+        <span class="kw">CASE</span>
+            <span class="kw">WHEN</span> shipping_country_code <span class="op">=</span> <span class="str">'US'</span> <span class="kw">THEN</span> <span class="str">'US'</span>
+            <span class="kw">WHEN</span> shipping_country_code <span class="op">=</span> <span class="str">'GB'</span> <span class="kw">THEN</span> <span class="str">'UK'</span>
+            <span class="kw">WHEN</span> shipping_country_code <span class="op">=</span> <span class="str">'IN'</span> <span class="kw">THEN</span> <span class="str">'IN'</span>
+            <span class="kw">ELSE</span> <span class="str">'RoW'</span>
+        <span class="kw">END</span>                         <span class="kw">AS</span> market,
+        <span class="fn">SUM</span>(total_price)            <span class="kw">AS</span> ltv,
+        <span class="fn">COUNT</span>(*)                    <span class="kw">AS</span> order_count,
+        <span class="fn">AVG</span>(total_price)            <span class="kw">AS</span> aov
+    <span class="kw">FROM</span> matrixify.orders
+    <span class="kw">WHERE</span> financial_status <span class="op">NOT IN</span> (<span class="str">'refunded'</span>, <span class="str">'voided'</span>)
+      <span class="kw">AND</span> cancelled_at <span class="kw">IS NULL</span>
+    <span class="kw">GROUP BY</span> customer_id, shipping_country_code
+)
+<span class="kw">SELECT</span>
+    market,
+    <span class="fn">COUNT</span>(<span class="kw">DISTINCT</span> customer_id)      <span class="kw">AS</span> customers,
+    <span class="fn">ROUND</span>(<span class="fn">AVG</span>(ltv), <span class="num">2</span>)              <span class="kw">AS</span> avg_ltv,
+    <span class="fn">ROUND</span>(<span class="fn">MEDIAN</span>(ltv), <span class="num">2</span>)           <span class="kw">AS</span> median_ltv,
+    <span class="fn">ROUND</span>(<span class="fn">AVG</span>(order_count), <span class="num">2</span>)      <span class="kw">AS</span> avg_orders,
+    <span class="fn">ROUND</span>(<span class="fn">AVG</span>(aov), <span class="num">2</span>)             <span class="kw">AS</span> avg_aov
+<span class="kw">FROM</span> customer_stats
+<span class="kw">GROUP BY</span> market
+<span class="kw">ORDER BY</span> avg_ltv <span class="kw">DESC</span>;</pre>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 5: SUBSCRIPTION FLYWHEEL -->
+<section id="s4" style="background:var(--bg2)">
+<div class="container strategy-section s4">
+  <div class="section-label" style="color:var(--coral)">Strategy 4</div>
+  <h2 class="section-title">Subscription Conversion Flywheel</h2>
+  <p class="section-sub">Subscription customers generate 3–5× the LTV of one-time buyers with dramatically lower churn. Growing subscription mix % is the highest-leverage revenue stability play available to VAHDAM.</p>
+
+  <div class="why-box">
+    <h4>Why This Strategy</h4>
+    <p>Subscription revenue is predictable, compounds with retention, and makes paid acquisition math work more favourably. At <mark class="ph" title="Run Metric 10 in queries/metrics.sql — most recent month sub_pct">[ YOUR CURRENT SUB MIX % ]</mark> subscription mix, VAHDAM is already well-positioned — the opportunity is to push this to <mark class="ph" title="Set your own growth target — e.g. current mix + 15–20pp over 12 months">[ YOUR TARGET SUB MIX % ]</mark> by converting the highest-repeat one-time buyers at the moment of peak engagement (post-purchase day 7), and by making subscription the frictionless default for the top 5 SKUs.</p>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px">Conversion Workflow</h4>
+  <div class="workflow">
+    <div class="wf-box accent-coral">One-time<br>buyers</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">Identify<br>repeat SKUs</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">Day 7<br>post-purchase</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box accent-coral">Subscription offer<br>+ savings</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box accent-coral">Higher LTV<br>+ lower churn</div>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px">Subscription Health Monitoring</h4>
+  <div class="workflow">
+    <div class="wf-box">Weekly<br>check</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box accent-coral">Sub mix %<br>vs target</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">Subscriber<br>churn rate</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">Pause vs<br>cancel ratio</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box accent-coral">Intervene<br>before cancel</div>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px">LTV Comparison: Subscriber vs One-Time Buyer</h4>
+  <div class="ltv-compare" style="margin-bottom:32px">
+    <div class="ltv-bar-wrap">
+      <div class="ltv-label">One-Time Buyers</div>
+      <div class="ltv-bar" style="height:80px;background:var(--border)">
+        <span style="color:var(--text2);font-size:.8rem">baseline</span>
+      </div>
+      <div class="ltv-val">Avg LTV: <mark class="ph" title="Run: SELECT AVG(ltv) FROM (...) WHERE order_count = 1">[ YOUR ONE-TIME LTV ]</mark></div>
+    </div>
+    <div class="ltv-bar-wrap">
+      <div class="ltv-label">Repeat (Non-Sub)</div>
+      <div class="ltv-bar" style="height:160px;background:var(--amber)">
+        <span><mark class="ph" title="= YOUR_REPEAT_LTV ÷ YOUR_ONE-TIME_LTV">[ REPEAT / OTB ]</mark></span>
+      </div>
+      <div class="ltv-val">Avg LTV: <mark class="ph" title="Run: SELECT AVG(ltv) FROM (...) WHERE order_count BETWEEN 2 AND 5 AND is_subscription = 0">[ YOUR REPEAT LTV ]</mark></div>
+    </div>
+    <div class="ltv-bar-wrap">
+      <div class="ltv-label">Subscribers</div>
+      <div class="ltv-bar" style="height:320px;background:var(--coral)">
+        <span><mark class="ph" title="= YOUR_SUBSCRIBER_LTV ÷ YOUR_ONE-TIME_LTV">[ SUB / OTB ]</mark></span>
+      </div>
+      <div class="ltv-val">Avg LTV: <mark class="ph" title="Run: SELECT AVG(ltv) FROM (...) WHERE is_subscription = 1 — needs real sub flag in order_line_items.properties">[ YOUR SUBSCRIBER LTV ]</mark></div>
+    </div>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:12px">Metrics Used</h4>
+  <div class="metrics-strip">
+    <span class="metric-badge badge-coral">Subscription Mix %</span>
+    <span class="metric-badge badge-coral">Product Repeat Rate</span>
+    <span class="metric-badge badge-coral">LTV Sub vs One-Time</span>
+    <span class="metric-badge badge-gray">Klaviyo Flow Conversion</span>
+  </div>
+
+  <div class="sql-block">
+    <h5>Key DuckDB Query — Top Subscription Conversion Candidates</h5>
+    <pre><span class="cm">-- One-time buyers of high-repeat SKUs: prime sub conversion targets</span>
+<span class="kw">WITH</span> buyer_history <span class="kw">AS</span> (
+    <span class="kw">SELECT</span>
+        o.customer_id,
+        o.email,
+        li.product_id,
+        li.title <span class="kw">AS</span> product_title,
+        <span class="fn">COUNT</span>(<span class="kw">DISTINCT</span> o.id)   <span class="kw">AS</span> times_purchased,
+        <span class="fn">MAX</span>(o.processed_at)    <span class="kw">AS</span> last_purchase,
+        <span class="fn">MAX</span>(<span class="kw">CASE WHEN</span>
+            <span class="fn">LOWER</span>(<span class="fn">CAST</span>(li.properties <span class="kw">AS</span> <span class="fn">VARCHAR</span>)) <span class="kw">LIKE</span> <span class="str">'%subscription%'</span>
+            <span class="kw">THEN</span> <span class="num">1</span> <span class="kw">ELSE</span> <span class="num">0</span> <span class="kw">END</span>)  <span class="kw">AS</span> already_subscribed
+    <span class="kw">FROM</span> matrixify.order_line_items li
+    <span class="kw">JOIN</span> matrixify.orders o <span class="kw">ON</span> li.order_id <span class="op">=</span> o.id
+    <span class="kw">WHERE</span> o.financial_status <span class="op">NOT IN</span> (<span class="str">'refunded'</span>, <span class="str">'voided'</span>)
+    <span class="kw">GROUP BY</span> <span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>
+)
+<span class="kw">SELECT</span> customer_id, email, product_title,
+       times_purchased,
+       <span class="fn">DATEDIFF</span>(<span class="str">'day'</span>, last_purchase, <span class="fn">CURRENT_DATE</span>) <span class="kw">AS</span> days_since_last
+<span class="kw">FROM</span> buyer_history
+<span class="kw">WHERE</span> times_purchased <span class="op">&gt;=</span> <span class="num">2</span>
+  <span class="kw">AND</span> already_subscribed <span class="op">=</span> <span class="num">0</span>
+  <span class="kw">AND</span> <span class="fn">DATEDIFF</span>(<span class="str">'day'</span>, last_purchase, <span class="fn">CURRENT_DATE</span>) <span class="kw">BETWEEN</span> <span class="num">5</span> <span class="kw">AND</span> <span class="num">21</span> <span class="cm">-- replace upper bound: use Metric 12 median_days for your data</span>
+<span class="kw">ORDER BY</span> times_purchased <span class="kw">DESC</span>, days_since_last
+<span class="kw">LIMIT</span> <span class="num">1000</span>;</pre>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 6: FUNNEL -->
+<section id="s5">
+<div class="container strategy-section s5">
+  <div class="section-label" style="color:var(--blue)">Strategy 5</div>
+  <h2 class="section-title">Checkout Funnel Pressure Reduction</h2>
+  <p class="section-sub">WebEngage gives event-level funnel data Shopify doesn't. A 2% improvement in checkout conversion rate is material incremental revenue with zero additional spend.</p>
+
+  <div class="why-box">
+    <h4>Why This Strategy</h4>
+    <p>Conversion rate optimisation is the only channel where the return is unlimited — fixing a funnel leak converts already-acquired traffic. WebEngage captures the full event stream from product view to order confirmation, making it possible to pinpoint exactly where and when users drop off, on which device, from which market. Every percentage point recovered here is the most efficient revenue possible.</p>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px">Weekly Funnel Audit Workflow</h4>
+  <div class="workflow">
+    <div class="wf-box accent-blue">webengage<br>.events</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">PV→Cart<br>rate</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">Cart→Checkout<br>rate</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box">Checkout→<br>Purchase rate</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box accent-blue">If drop &gt;5%<br>WoW → alert</div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-box accent-blue">Identify stage<br>→ intervene</div>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px">Funnel Stages</h4>
+  <div class="funnel-viz" style="margin-bottom:32px">
+    <div class="funnel-bar">
+      <div class="funnel-bar-inner" style="height:200px;background:linear-gradient(180deg,#3b82f6,#2563eb)">
+        <span style="color:#fff;font-weight:800;font-size:1rem">100%</span>
+      </div>
+      <div class="funnel-label">Product<br>Viewed</div>
+      <div style="text-align:center;font-size:.72rem;color:var(--text3)">baseline</div>
+    </div>
+    <div style="display:flex;align-items:center;color:var(--text3);font-size:1.2rem;padding-bottom:48px">→</div>
+    <div class="funnel-bar">
+      <div class="funnel-bar-inner" style="height:130px;background:linear-gradient(180deg,#60a5fa,#3b82f6)">
+        <span style="color:#fff;font-weight:800;font-size:1rem"><mark class="ph" title="Run Metric 9 — added_to_cart / product_viewed × 100">[ YOUR ATC RATE ]</mark></span>
+      </div>
+      <div class="funnel-label">Added<br>To Cart</div>
+      <div style="text-align:center;font-size:.72rem;color:var(--coral)">↓ <mark class="ph" title="= 100% − YOUR ATC RATE">[ YOUR PV→ATC DROP ]</mark> drop</div>
+    </div>
+    <div style="display:flex;align-items:center;color:var(--text3);font-size:1.2rem;padding-bottom:48px">→</div>
+    <div class="funnel-bar">
+      <div class="funnel-bar-inner" style="height:90px;background:linear-gradient(180deg,#93c5fd,#60a5fa)">
+        <span style="color:#1e40af;font-weight:800;font-size:1rem"><mark class="ph" title="Run Metric 9 — checkout_created / product_viewed × 100">[ YOUR CHK RATE ]</mark></span>
+      </div>
+      <div class="funnel-label">Checkout<br>Created</div>
+      <div style="text-align:center;font-size:.72rem;color:var(--coral)">↓ <mark class="ph" title="= YOUR ATC RATE − YOUR CHK RATE">[ YOUR ATC→CHK DROP ]</mark> drop</div>
+    </div>
+    <div style="display:flex;align-items:center;color:var(--text3);font-size:1.2rem;padding-bottom:48px">→</div>
+    <div class="funnel-bar">
+      <div class="funnel-bar-inner" style="height:55px;background:linear-gradient(180deg,#16a34a,#15803d)">
+        <span style="color:#fff;font-weight:800;font-size:1rem"><mark class="ph" title="Run Metric 9 — order_created / product_viewed × 100">[ YOUR CVR ]</mark></span>
+      </div>
+      <div class="funnel-label">Order<br>Created</div>
+      <div style="text-align:center;font-size:.72rem;color:var(--green)">✓ goal</div>
+    </div>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px">Decision Tree</h4>
+  <div class="dtree">
+    <div class="dt-card">
+      <div class="dt-if">If</div>
+      <div class="dt-condition">Drop at Cart → Checkout &gt; 5% WoW</div>
+      <div class="dt-then">Then</div>
+      <div class="dt-action">Trigger Klaviyo cart abandonment flow within 1 hour. Check if price increase or shipping cost change coincides.</div>
+    </div>
+    <div class="dt-card">
+      <div class="dt-if">If</div>
+      <div class="dt-condition">Drop at Checkout → Purchase</div>
+      <div class="dt-then">Then</div>
+      <div class="dt-action">Audit payment options (BNPL availability?), shipping costs, and trust signals. A/B test checkout page layout.</div>
+    </div>
+    <div class="dt-card">
+      <div class="dt-if">If</div>
+      <div class="dt-condition">Mobile CVR &lt; Desktop CVR by &gt; <mark class="ph" title="A 10-15% gap is common; set your own alert level based on your mobile traffic share">[ YOUR MOBILE GAP THRESHOLD ]</mark></div>
+      <div class="dt-then">Then</div>
+      <div class="dt-action">Mobile checkout UX review. Check tap target sizes, form fields, Apple/Google Pay prominence, page load time on 4G.</div>
+    </div>
+    <div class="dt-card">
+      <div class="dt-if">If</div>
+      <div class="dt-condition">US / UK conversion gap &gt; <mark class="ph" title="Run Metric 9 filtered by country_code and compare — your actual gap may differ">[ YOUR GEO CVR THRESHOLD ]</mark></div>
+      <div class="dt-then">Then</div>
+      <div class="dt-action">Localise checkout: ensure local currency, market-specific shipping options displayed, UK trust badges (reviews, delivery SLA).</div>
+    </div>
+  </div>
+
+  <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:12px">Metrics Used</h4>
+  <div class="metrics-strip">
+    <span class="metric-badge badge-blue">Checkout Conversion Rate</span>
+    <span class="metric-badge badge-blue">Cart Abandonment Rate</span>
+    <span class="metric-badge badge-blue">Device Split</span>
+    <span class="metric-badge badge-gray">WebEngage Funnel Events</span>
+  </div>
+
+  <div class="sql-block">
+    <h5>Key DuckDB Query — Weekly Funnel Drop-Off</h5>
+    <pre><span class="cm">-- Weekly conversion funnel with WoW drop detection</span>
+<span class="kw">WITH</span> weekly_funnel <span class="kw">AS</span> (
+    <span class="kw">SELECT</span>
+        <span class="fn">DATE_TRUNC</span>(<span class="str">'week'</span>, summary_date)   <span class="kw">AS</span> week,
+        event_name,
+        <span class="fn">SUM</span>(event_count)               <span class="kw">AS</span> cnt
+    <span class="kw">FROM</span> webengage.event_summary
+    <span class="kw">WHERE</span> event_name <span class="kw">IN</span> (
+        <span class="str">'Product Viewed'</span>, <span class="str">'Added To Cart'</span>,
+        <span class="str">'Checkout created'</span>, <span class="str">'Order created'</span>
+    )
+    <span class="kw">GROUP BY</span> <span class="num">1</span>, <span class="num">2</span>
+),
+pivoted <span class="kw">AS</span> (
+    <span class="kw">SELECT</span> week,
+        <span class="fn">MAX</span>(<span class="kw">CASE WHEN</span> event_name<span class="op">=</span><span class="str">'Product Viewed'</span>   <span class="kw">THEN</span> cnt <span class="kw">END</span>) <span class="kw">AS</span> pv,
+        <span class="fn">MAX</span>(<span class="kw">CASE WHEN</span> event_name<span class="op">=</span><span class="str">'Added To Cart'</span>    <span class="kw">THEN</span> cnt <span class="kw">END</span>) <span class="kw">AS</span> atc,
+        <span class="fn">MAX</span>(<span class="kw">CASE WHEN</span> event_name<span class="op">=</span><span class="str">'Checkout created'</span> <span class="kw">THEN</span> cnt <span class="kw">END</span>) <span class="kw">AS</span> chk,
+        <span class="fn">MAX</span>(<span class="kw">CASE WHEN</span> event_name<span class="op">=</span><span class="str">'Order created'</span>    <span class="kw">THEN</span> cnt <span class="kw">END</span>) <span class="kw">AS</span> ord
+    <span class="kw">FROM</span> weekly_funnel <span class="kw">GROUP BY</span> week
+)
+<span class="kw">SELECT</span>
+    week,
+    <span class="fn">ROUND</span>(atc  <span class="op">*</span> <span class="num">100.0</span> <span class="op">/</span> <span class="fn">NULLIF</span>(pv,  <span class="num">0</span>), <span class="num">1</span>) <span class="kw">AS</span> pv_to_atc_pct,
+    <span class="fn">ROUND</span>(chk  <span class="op">*</span> <span class="num">100.0</span> <span class="op">/</span> <span class="fn">NULLIF</span>(atc, <span class="num">0</span>), <span class="num">1</span>) <span class="kw">AS</span> atc_to_chk_pct,
+    <span class="fn">ROUND</span>(ord  <span class="op">*</span> <span class="num">100.0</span> <span class="op">/</span> <span class="fn">NULLIF</span>(chk, <span class="num">0</span>), <span class="num">1</span>) <span class="kw">AS</span> chk_to_ord_pct,
+    <span class="fn">ROUND</span>(ord  <span class="op">*</span> <span class="num">100.0</span> <span class="op">/</span> <span class="fn">NULLIF</span>(pv,  <span class="num">0</span>), <span class="num">1</span>) <span class="kw">AS</span> overall_cvr_pct,
+    <span class="kw">CASE WHEN</span>
+        (<span class="fn">ROUND</span>(ord<span class="op">*</span><span class="num">100.0</span><span class="op">/</span><span class="fn">NULLIF</span>(pv,<span class="num">0</span>),<span class="num">1</span>) <span class="op">-</span>
+         <span class="fn">LAG</span>(<span class="fn">ROUND</span>(ord<span class="op">*</span><span class="num">100.0</span><span class="op">/</span><span class="fn">NULLIF</span>(pv,<span class="num">0</span>),<span class="num">1</span>)) <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> week)) <span class="op">&lt;</span> <span class="op">-</span><span class="num">5</span>
+    <span class="kw">THEN</span> <span class="str">'⚠ ALERT: CVR dropped &gt;5%'</span> <span class="cm">-- replace -5 with your own alert sensitivity</span>
+    <span class="kw">ELSE</span> <span class="str">''</span> <span class="kw">END</span>                              <span class="kw">AS</span> alert
+<span class="kw">FROM</span> pivoted
+<span class="kw">ORDER BY</span> week <span class="kw">DESC</span>
+<span class="kw">LIMIT</span> <span class="num">12</span>;</pre>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 7: DATA ARCHITECTURE -->
+<section id="arch" style="background:var(--bg2)">
+<div class="container">
+  <div class="section-label" style="color:var(--blue)">Data Architecture</div>
+  <h2 class="section-title">How the Stack Fits Together</h2>
+  <p class="section-sub">Four data sources, one DuckDB database, one SQL file to rule them all. Zero infrastructure, instant queries, scales to MotherDuck when needed.</p>
+
+  <div class="arch-db" style="margin-bottom:24px">
+    <div style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#818cf8;margin-bottom:8px">vahdam_dtc.duckdb</div>
+    <div style="font-size:1.4rem;font-weight:800;margin-bottom:6px">4 Schemas · 46 Tables · 15 Metrics</div>
+    <div style="font-size:.85rem;color:#94a3b8">All analytics logic lives in SQL — portable, versionable, zero vendor lock-in</div>
+  </div>
+
+  <div class="arch-flow" style="margin-bottom:24px">
+    <div class="arch-source" style="border-top:3px solid var(--amber)">
+      <div style="font-size:1.4rem;margin-bottom:8px">📦</div>
+      <div style="font-weight:700;font-size:.88rem;margin-bottom:4px">Matrixify</div>
+      <div style="font-size:.75rem;color:var(--text2);margin-bottom:8px">Shopify raw exports</div>
+      <span class="src-badge src-matrixify">20 tables</span>
+      <div style="font-size:.72rem;color:var(--text3);margin-top:8px">orders, customers, products, order_line_items, variants…</div>
+    </div>
+    <div class="arch-source" style="border-top:3px solid var(--green)">
+      <div style="font-size:1.4rem;margin-bottom:8px">📊</div>
+      <div style="font-weight:700;font-size:.88rem;margin-bottom:4px">Shopify Analytics</div>
+      <div style="font-size:.75rem;color:var(--text2);margin-bottom:8px">Aggregated reports</div>
+      <span class="src-badge src-shopify">13 tables</span>
+      <div style="font-size:.72rem;color:var(--text3);margin-top:8px">revenue_metrics, acquisition_metrics, marketing_attribution…</div>
+    </div>
+    <div class="arch-source" style="border-top:3px solid var(--purple)">
+      <div style="font-size:1.4rem;margin-bottom:8px">✉️</div>
+      <div style="font-weight:700;font-size:.88rem;margin-bottom:4px">Klaviyo</div>
+      <div style="font-size:.75rem;color:var(--text2);margin-bottom:8px">Email + SMS platform</div>
+      <span class="src-badge src-klaviyo">9 tables</span>
+      <div style="font-size:.72rem;color:var(--text3);margin-top:8px">profiles, campaigns, flows, events, deliverability…</div>
+    </div>
+    <div class="arch-source" style="border-top:3px solid var(--blue)">
+      <div style="font-size:1.4rem;margin-bottom:8px">📱</div>
+      <div style="font-weight:700;font-size:.88rem;margin-bottom:4px">WebEngage</div>
+      <div style="font-size:.75rem;color:var(--text2);margin-bottom:8px">CDP event stream</div>
+      <span class="src-badge src-webengage">4 tables</span>
+      <div style="font-size:.72rem;color:var(--text3);margin-top:8px">user_profiles, events, event_summary, revenue_mapping</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:24px">
+    <h4 style="font-size:.88rem;font-weight:700;margin-bottom:16px">How to Use</h4>
+    <div style="display:grid;gap:10px">
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <div style="background:var(--purple);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0">1</div>
+        <div style="font-size:.88rem;color:var(--text2)">Export CSVs from Matrixify / Shopify Admin / Klaviyo / WebEngage</div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <div style="background:var(--teal);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0">2</div>
+        <div style="font-size:.88rem;color:var(--text2)">Drop files into <code style="background:var(--bg3);padding:1px 6px;border-radius:4px">data/[source]/</code> using exact table names (orders.csv, profiles.csv, etc.)</div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <div style="background:var(--amber);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0">3</div>
+        <div style="font-size:.88rem;color:var(--text2)">Run <code style="background:var(--bg3);padding:1px 6px;border-radius:4px">python run_all.py</code> — all 4 sources load with upsert/dedup logic</div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <div style="background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0">4</div>
+        <div style="font-size:.88rem;color:var(--text2)">Query with <code style="background:var(--bg3);padding:1px 6px;border-radius:4px">duckdb vahdam_dtc.duckdb</code> then <code style="background:var(--bg3);padding:1px 6px;border-radius:4px">.read queries/metrics.sql</code></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 style="font-size:.88rem;font-weight:700;margin-bottom:12px">Path to Scale</h4>
+    <div class="workflow">
+      <div class="wf-box accent-blue" style="text-align:left;padding:14px 16px">
+        <div style="font-weight:800;font-size:.82rem;margin-bottom:4px">DuckDB (now)</div>
+        <div style="font-size:.72rem;opacity:.8">Local file, instant queries, zero infra cost</div>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-box" style="text-align:left;padding:14px 16px">
+        <div style="font-weight:800;font-size:.82rem;margin-bottom:4px">MotherDuck (scale)</div>
+        <div style="font-size:.72rem;color:var(--text2)">Same SQL, cloud hosted, shareable with team</div>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-box" style="text-align:left;padding:14px 16px">
+        <div style="font-weight:800;font-size:.82rem;margin-bottom:4px">BI Tool</div>
+        <div style="font-size:.72rem;color:var(--text2)">Metabase / Superset / Evidence.dev dashboards</div>
+      </div>
+      <div class="wf-arrow">→</div>
+      <div class="wf-box accent-teal" style="text-align:left;padding:14px 16px">
+        <div style="font-weight:800;font-size:.82rem;margin-bottom:4px">Alerting</div>
+        <div style="font-size:.72rem;opacity:.8">Metric drop triggers Slack / email notification</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SECTION 8: ROADMAP -->
+<section id="roadmap">
+<div class="container">
+  <div class="section-label" style="color:var(--amber)">Implementation Roadmap</div>
+  <h2 class="section-title">From Setup to Autonomous Analytics</h2>
+  <p class="section-sub">Four phases from first CSV to a fully automated, alerting analytics layer running on real VAHDAM data.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">1</div>
+      <div class="tl-phase">Week 1</div>
+      <div class="tl-title">Foundation — First Data In</div>
+      <ul class="tl-tasks">
+        <li>Run <code style="background:var(--bg3);padding:1px 5px;border-radius:3px">python _init_db.py</code> to create vahdam_dtc.duckdb with all 46 tables</li>
+        <li>Export orders.csv + customers.csv from Matrixify, drop into data/matrixify/</li>
+        <li>Run <code style="background:var(--bg3);padding:1px 5px;border-radius:3px">python run_all.py --source matrixify</code></li>
+        <li>Execute Metrics 1, 2, 4, 8 (revenue, new/returning, repeat rate, AOV) manually</li>
+        <li>Validate row counts match Shopify admin dashboard</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">2</div>
+      <div class="tl-phase">Weeks 2–3</div>
+      <div class="tl-title">Full Source Coverage + Validation</div>
+      <ul class="tl-tasks">
+        <li>Export and load all 4 sources — Matrixify, Shopify Analytics, Klaviyo, WebEngage</li>
+        <li>Run all 15 metric queries, cross-check totals against source dashboards</li>
+        <li>Identify discrepancies (attribution windows, timezone differences) and document</li>
+        <li>Build first LTV:CAC comparison by channel (Strategy 2)</li>
+        <li>Export churn risk list from Klaviyo, import profiles.csv, run Metric 13 + 14</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">3</div>
+      <div class="tl-phase">Month 2</div>
+      <div class="tl-title">Automate + Visualise</div>
+      <ul class="tl-tasks">
+        <li>Schedule <code style="background:var(--bg3);padding:1px 5px;border-radius:3px">python run_all.py</code> nightly via Windows Task Scheduler or cron</li>
+        <li>Connect Metabase or Evidence.dev to vahdam_dtc.duckdb (or migrate to MotherDuck)</li>
+        <li>Build dashboards for the 5 Tier 1 metrics (auto-refresh daily)</li>
+        <li>Configure Klaviyo win-back flow based on Metric 13 churn segments</li>
+        <li>Set AOV alert: flag if MoM drops &gt;5% (Metric 8)</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">4</div>
+      <div class="tl-phase">Month 3+</div>
+      <div class="tl-title">Intelligence Layer — Predict, Alert, Act</div>
+      <ul class="tl-tasks">
+        <li>Add Slack/email alerting: metric drops trigger notifications to team</li>
+        <li>Build subscription conversion audiences: export from DuckDB → Klaviyo segment daily</li>
+        <li>Add RFM segmentation on top of existing cohort queries</li>
+        <li>Evaluate MotherDuck for team-shared access and scheduled queries</li>
+        <li>Expand to predictive: time-series AOV forecast, seasonal demand signals</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:6px"><strong>VAHDAM DTC Growth Intelligence</strong></p>
+  <p>Built with <a href="https://duckdb.org" target="_blank">DuckDB</a> + Claude &nbsp;·&nbsp; 4 schemas · 46 tables · 15 metrics · 5 strategies</p>
+  <p style="margin-top:10px;font-size:.75rem;color:#484f58">Data sources: Matrixify · Shopify Analytics · Klaviyo · WebEngage &nbsp;|&nbsp; All SQL in queries/metrics.sql</p>
+</footer>
+
+</body>
+</html>
