@@ -600,6 +600,47 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
   #main { margin-left: 0; }
 }
 
+
+/* ── BACK TO TOP ── */
+#back-top {
+  position: fixed; bottom: 28px; right: 28px; z-index: 200;
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--purple); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; box-shadow: 0 4px 16px rgba(124,58,237,.4);
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s, transform .2s;
+  font-size: 18px; font-weight: 700;
+}
+#back-top.visible { opacity: 1; pointer-events: auto; }
+#back-top:hover   { transform: translateY(-3px); }
+
+/* ── SECTION BREADCRUMB ── */
+.sec-breadcrumb {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+  padding: 10px 0 20px;
+  font-size: .76rem; color: var(--text3);
+}
+.sec-breadcrumb a {
+  color: var(--text2); text-decoration: none; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--bg3);
+  transition: all .14s;
+}
+.sec-breadcrumb a:hover { color: var(--purple); border-color: var(--purple); background: var(--purple-light); }
+.sec-breadcrumb .crumb-sep { color: var(--text3); font-size: .7rem; }
+
+/* ── Q-CARD BACK LINK ── */
+.q-back-link {
+  font-size: .74rem; color: var(--text3); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 8px; border-radius: 999px;
+  border: 1px dashed var(--border);
+  transition: all .14s;
+}
+.q-back-link:hover { color: var(--text2); border-color: var(--text3); }
+
 </style>
 </head>
 <body>
@@ -740,7 +781,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-good"><strong>Healthy:</strong> All 3 core markets (US, UK, IN) growing MoM. No single market &gt;60% of total.<br><strong>Watch:</strong> One market declining while others grow — flag for geo strategy review.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-amber" href="#s3">→ Geo Prioritisation strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card">
@@ -753,7 +795,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-watch"><strong>Target:</strong> Returning customers &gt;60% of revenue (signals strong retention moat).<br><strong>Red flag:</strong> New customer share creeping above 45% — retention is eroding.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card">
@@ -766,7 +809,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-good"><strong>Healthy:</strong> Gross margin stable or improving MoM per product type.<br><strong>Watch:</strong> Gift Sets or bundled SKUs showing lower margin — pricing or COGS review needed.</div>
         <div class="q-footer">
           <span style="font-size:.72rem;color:var(--text3)">Standalone — no strategy dependency</span>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card">
@@ -779,7 +823,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-bad"><strong>Alert trigger:</strong> AOV drops &gt;5% MoM — query flags this automatically.<br><strong>Investigate:</strong> Cross-check against Email Revenue % — if email share is high during a drop, Klaviyo sends may be discount-heavy.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-teal" href="#s2">→ Channel Efficiency strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
     </div>
@@ -811,7 +856,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-watch"><strong>Scale:</strong> Channels with LTV:CAC &gt;3:1 — increase budget.<br><strong>Pause:</strong> Channels &lt;2:1 — the unit economics don't work.<br><strong>Watch:</strong> Channels with no CAC data (organic, direct) — estimate via assisted conversions.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-teal" href="#s2">→ Channel Efficiency strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card">
@@ -824,7 +870,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-good"><strong>Use for:</strong> Setting market-specific CAC ceilings (e.g., if median LTV in UK = $130, max acceptable CAC = $43 at 3:1).<br><strong>Watch:</strong> Large gap between avg and median LTV — signals a small VIP cohort carrying disproportionate revenue.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-amber" href="#s3">→ Geo Prioritisation strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card combo" style="--combo-a:var(--teal);--combo-b:var(--amber)">
@@ -840,7 +887,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-watch"><strong>Action:</strong> Sort channels by LTV:CAC, not raw CAC. An influencer channel with $60 CAC but $280 LTV is 4.7× — keep it. A Google channel with $25 CAC but $60 LTV is 2.4× — review it.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-teal" href="#s2">→ Channel Efficiency strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card">
@@ -853,7 +901,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-watch"><strong>From your data:</strong> Once you run Metric 12, your median days-to-2nd defines the benchmark. Below <mark class="ph" title="Run Metric 12 against real orders export">[ YOUR MEDIAN T2P ]</mark> = strong; above 90 = flow is firing too late.<br><strong>Action:</strong> Set Klaviyo day-N post-purchase trigger to median_days − 7.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
     </div>
@@ -883,7 +932,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-good"><strong>Strong:</strong> 90d repeat rate &gt;<mark class="ph" title="Consumable DTC benchmark; your actual target should be set from your own cohort data once loaded">[ 25% — INDUSTRY BENCHMARK ]</mark> = healthy DTC retention.<br><strong>Weak:</strong> Rate trending down across recent cohorts — investigate if a product, acquisition channel, or flow changed.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card">
@@ -896,7 +946,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-watch"><strong>Read together with Metric 12:</strong> If median time-to-2nd is 40 days but 30d retention is &lt;10%, customers are taking longer — not churning. If 90d retention = 30d retention, no one returns after the first window.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card">
@@ -909,7 +960,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-bad"><strong>Act when:</strong> High + winback &gt;<mark class="ph" title="Run Metric 13 against your real Klaviyo profiles export — your actual distribution will set the right threshold">[ 25% — ROUGH BENCHMARK ]</mark> of active list.<br><strong>Note:</strong> These thresholds are Klaviyo's predictions, not derived from your own order history. Cross-validate against Metric 4 cohorts.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card combo" style="--combo-a:var(--purple);--combo-b:var(--coral)">
@@ -923,7 +975,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-bad"><strong>Frame it this way:</strong> "We have $X in predicted 1-year CLV from customers who are likely to churn. A 30% recovery rate from win-back flows = $Y in recovered revenue."<br><strong>Caveat:</strong> predicted_clv_1y is Klaviyo's model output — accuracy depends on how much purchase history Klaviyo has synced from Shopify.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card">
@@ -937,7 +990,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-footer">
           <a class="q-detail-link lk-coral" href="#s4">→ Subscription Flywheel strategy</a>
           <a class="q-detail-link lk-purple" href="#s1">→ Retention Engine</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
     </div>
@@ -969,7 +1023,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-watch"><strong>Target:</strong> <mark class="ph" title="Mature DTC email programs; your starting point will be lower — treat this as a 12-month goal, not an immediate expectation">[ 30–40% — INDUSTRY BENCHMARK ]</mark> of net sales attributed to Klaviyo.<br><strong>Gap:</strong> Below 20% = significant flows are missing or poorly sequenced.<br><strong>Caveat:</strong> Klaviyo uses last-touch attribution with a 5-day window by default — this overstates email influence when other channels are active.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-teal" href="#s2">→ Channel Efficiency strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card">
@@ -983,7 +1038,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-bad"><strong>Reallocate trigger:</strong> Any channel with LTV:CAC &lt;2:1 for 2 consecutive months → pause or significantly reduce budget.<br><strong>Note:</strong> CAC from Shopify Analytics uses session-based attribution; treat it as a proxy, not ground truth.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-teal" href="#s2">→ Channel Efficiency strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
     </div>
@@ -1013,7 +1069,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-watch"><strong>Your baseline:</strong> Run Metric 9 against your real WebEngage export — <mark class="ph" title="Run Metric 9, most recent 4 weeks average">[ YOUR ATC→CHK RATE ]</mark> cart-to-checkout, <mark class="ph" title="Run Metric 9, most recent 4 weeks average">[ YOUR CHK→ORDER RATE ]</mark> checkout-to-order.<br><strong>Alert:</strong> Any stage drops &gt;5% WoW → query flags it automatically.<br><strong>Investigate by:</strong> Device type (mobile vs desktop gap), market (US vs UK checkout friction).</div>
         <div class="q-footer">
           <a class="q-detail-link lk-blue" href="#s5">→ Funnel Conversion strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card">
@@ -1026,7 +1083,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-good"><strong>Target:</strong> Push toward <mark class="ph" title="Set based on current mix from Metric 10 + a realistic 12-month growth goal">[ YOUR TARGET SUB MIX % ]</mark> subscription mix for revenue predictability.<br><strong>Current:</strong> <mark class="ph" title="python run_all.py → duckdb vahdam_dtc.duckdb → .read queries/metrics.sql — M10 section">[ RUN METRIC 10 ]</mark> (from your real Matrixify export).<br><strong>Watch:</strong> Month where subscription % drops sharply = subscriber churn spike → investigate pauses.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-coral" href="#s4">→ Subscription Flywheel strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card combo" style="--combo-a:var(--coral);--combo-b:var(--purple)">
@@ -1041,7 +1099,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-signal signal-good"><strong>Action:</strong> Export this list → create a Klaviyo segment of buyers of these SKUs who are NOT subscribed → enrol in subscription offer flow day 7 post-purchase.<br><strong>Expected outcome:</strong> <mark class="ph" title="Post-purchase subscription offer conversion rate benchmark for DTC consumables">[ 8–15% — INDUSTRY BENCHMARK ]</mark> subscription conversion rate on this warm audience.</div>
         <div class="q-footer">
           <a class="q-detail-link lk-coral" href="#s4">→ Subscription Flywheel strategy</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
       <div class="q-card combo" style="--combo-a:var(--blue);--combo-b:var(--teal)">
@@ -1058,7 +1117,8 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
         <div class="q-footer">
           <a class="q-detail-link lk-blue" href="#s5">→ Funnel Conversion strategy</a>
           <a class="q-detail-link lk-teal" href="#s2">→ Channel Efficiency</a>
-        </div>
+      <a class="q-back-link" href="#questions">↑ Questions</a>
+    </div>
       </div>
 
     </div>
@@ -1548,6 +1608,15 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
 <!-- SECTION 2: RETENTION ENGINE -->
 <section id="s1">
 <div class="container strategy-section s1">
+  <div class="sec-breadcrumb">
+    <a href="#">↑ Top</a>
+    <span class="crumb-sep">›</span>
+    <a href="#questions">Key Questions</a>
+    <span class="crumb-sep">›</span>
+    <a href="#overview">Metrics Framework</a>
+    <span class="crumb-sep">›</span>
+    <span style="color:var(--purple);font-weight:700">Strategy 1 — Retention Engine</span>
+  </div>
   <div class="section-label" style="color:var(--purple)">Strategy 1</div>
   <h2 class="section-title">Retention-First Revenue Engine</h2>
   <p class="section-sub">Acquire less expensively by retaining more effectively. VAHDAM's repeat purchase rate signals that retention — not acquisition — is the primary growth lever.</p>
@@ -1639,6 +1708,15 @@ details.sb-sec[open] > summary .sb-chevron { transform: rotate(180deg); }
 <!-- SECTION 3: CHANNEL EFFICIENCY -->
 <section id="s2" style="background:var(--bg2)">
 <div class="container strategy-section s2">
+  <div class="sec-breadcrumb">
+    <a href="#">↑ Top</a>
+    <span class="crumb-sep">›</span>
+    <a href="#questions">Key Questions</a>
+    <span class="crumb-sep">›</span>
+    <a href="#overview">Metrics Framework</a>
+    <span class="crumb-sep">›</span>
+    <span style="color:var(--teal);font-weight:700">Strategy 2 — Channel Efficiency</span>
+  </div>
   <div class="section-label" style="color:var(--teal)">Strategy 2</div>
   <h2 class="section-title">Channel Efficiency Reallocation</h2>
   <p class="section-sub">Most DTC brands over-invest in paid, under-invest in owned. Klaviyo should generate 30–40% of revenue — if it doesn't, that gap is free money left on the table.</p>
@@ -1745,6 +1823,15 @@ cac_data <span class="kw">AS</span> (
 <!-- SECTION 4: GEO -->
 <section id="s3">
 <div class="container strategy-section s3">
+  <div class="sec-breadcrumb">
+    <a href="#">↑ Top</a>
+    <span class="crumb-sep">›</span>
+    <a href="#questions">Key Questions</a>
+    <span class="crumb-sep">›</span>
+    <a href="#overview">Metrics Framework</a>
+    <span class="crumb-sep">›</span>
+    <span style="color:var(--amber);font-weight:700">Strategy 3 — Geo Prioritisation</span>
+  </div>
   <div class="section-label" style="color:var(--amber)">Strategy 3</div>
   <h2 class="section-title">Geo-Market LTV Prioritisation</h2>
   <p class="section-sub">US and UK customers have distinct LTV profiles and different price sensitivities. Market-specific CAC thresholds drive far better budget allocation than blended averages.</p>
@@ -1851,6 +1938,15 @@ cac_data <span class="kw">AS</span> (
 <!-- SECTION 5: SUBSCRIPTION FLYWHEEL -->
 <section id="s4" style="background:var(--bg2)">
 <div class="container strategy-section s4">
+  <div class="sec-breadcrumb">
+    <a href="#">↑ Top</a>
+    <span class="crumb-sep">›</span>
+    <a href="#questions">Key Questions</a>
+    <span class="crumb-sep">›</span>
+    <a href="#overview">Metrics Framework</a>
+    <span class="crumb-sep">›</span>
+    <span style="color:var(--coral);font-weight:700">Strategy 4 — Subscription Flywheel</span>
+  </div>
   <div class="section-label" style="color:var(--coral)">Strategy 4</div>
   <h2 class="section-title">Subscription Conversion Flywheel</h2>
   <p class="section-sub">Subscription customers generate 3–5× the LTV of one-time buyers with dramatically lower churn. Growing subscription mix % is the highest-leverage revenue stability play available to VAHDAM.</p>
@@ -1956,6 +2052,15 @@ cac_data <span class="kw">AS</span> (
 <!-- SECTION 6: FUNNEL -->
 <section id="s5">
 <div class="container strategy-section s5">
+  <div class="sec-breadcrumb">
+    <a href="#">↑ Top</a>
+    <span class="crumb-sep">›</span>
+    <a href="#questions">Key Questions</a>
+    <span class="crumb-sep">›</span>
+    <a href="#overview">Metrics Framework</a>
+    <span class="crumb-sep">›</span>
+    <span style="color:var(--blue);font-weight:700">Strategy 5 — Funnel Conversion</span>
+  </div>
   <div class="section-label" style="color:var(--blue)">Strategy 5</div>
   <h2 class="section-title">Checkout Funnel Pressure Reduction</h2>
   <p class="section-sub">WebEngage gives event-level funnel data Shopify doesn't. A 2% improvement in checkout conversion rate is material incremental revenue with zero additional spend.</p>
@@ -2097,6 +2202,15 @@ pivoted <span class="kw">AS</span> (
 <!-- SECTION 7: DATA ARCHITECTURE -->
 <section id="arch" style="background:var(--bg2)">
 <div class="container">
+  <div class="sec-breadcrumb">
+    <a href="#">↑ Top</a>
+    <span class="crumb-sep">›</span>
+    <a href="#questions">Key Questions</a>
+    <span class="crumb-sep">›</span>
+    <a href="#overview">Metrics Framework</a>
+    <span class="crumb-sep">›</span>
+    <span style="color:var(--blue);font-weight:700">Data Architecture</span>
+  </div>
   <div class="section-label" style="color:var(--blue)">Data Architecture</div>
   <h2 class="section-title">How the Stack Fits Together</h2>
   <p class="section-sub">Four data sources, one DuckDB database, one SQL file to rule them all. Zero infrastructure, instant queries, scales to MotherDuck when needed.</p>
@@ -2192,6 +2306,15 @@ pivoted <span class="kw">AS</span> (
 <!-- SECTION 8: ROADMAP -->
 <section id="roadmap">
 <div class="container">
+  <div class="sec-breadcrumb">
+    <a href="#">↑ Top</a>
+    <span class="crumb-sep">›</span>
+    <a href="#questions">Key Questions</a>
+    <span class="crumb-sep">›</span>
+    <a href="#overview">Metrics Framework</a>
+    <span class="crumb-sep">›</span>
+    <span style="color:var(--amber);font-weight:700">Roadmap</span>
+  </div>
   <div class="section-label" style="color:var(--amber)">Implementation Roadmap</div>
   <h2 class="section-title">From Setup to Autonomous Analytics</h2>
   <p class="section-sub">Four phases from first CSV to a fully automated, alerting analytics layer running on real VAHDAM data.</p>
@@ -2267,6 +2390,12 @@ function toggleSidebar() {
   ov.classList.toggle('sb-open');
 }
 
+
+// Back to top visibility
+window.addEventListener('scroll', function() {
+  document.getElementById('back-top').classList.toggle('visible', window.scrollY > 500);
+});
+
 // Active link via IntersectionObserver
 (function() {
   const links = document.querySelectorAll('#sidebar a[href^="#"]');
@@ -2303,5 +2432,7 @@ function toggleSidebar() {
 })();
 </script>
 
+
+<a id="back-top" href="#" title="Back to top" aria-label="Back to top">↑</a>
 </body>
 </html>
