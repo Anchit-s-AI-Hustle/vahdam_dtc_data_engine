@@ -416,6 +416,75 @@ mark.ph {
   .ns-metric { font-size: 1.5rem; }
   .q-grid { grid-template-columns: 1fr; }
 }
+
+/* ── METRIC ACCORDION ── */
+.m-accordion { display:flex; flex-direction:column; gap:4px; margin-top:32px; }
+.m-tier-header {
+  display:flex; align-items:center; gap:10px;
+  padding:10px 0 10px; margin-top:24px; margin-bottom:4px;
+  border-bottom:2px solid var(--border);
+  font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--text3);
+}
+.m-tier-header .tier-dot {
+  width:10px; height:10px; border-radius:50%; flex-shrink:0;
+}
+details.m-row {
+  background:var(--bg2); border:1px solid var(--border); border-radius:8px;
+  overflow:hidden;
+}
+details.m-row[open] { border-color:var(--accent,var(--border)); }
+summary.m-row-summary {
+  display:flex; align-items:center; gap:12px; padding:12px 16px;
+  cursor:pointer; list-style:none; user-select:none;
+}
+summary.m-row-summary::-webkit-details-marker { display:none; }
+summary.m-row-summary:hover { background:var(--bg3); }
+.m-chevron {
+  margin-left:auto; flex-shrink:0;
+  width:16px; height:16px; color:var(--text3);
+  transition:transform .18s;
+}
+details.m-row[open] .m-chevron { transform:rotate(180deg); }
+.m-badge {
+  font-size:.66rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+  padding:2px 8px; border-radius:4px; flex-shrink:0;
+  color:#fff;
+}
+.m-name { font-size:.88rem; font-weight:700; color:var(--text); min-width:200px; }
+.m-question { font-size:.82rem; color:var(--text2); line-height:1.4; flex:1; min-width:0; }
+.m-row-body {
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  gap:1px; background:var(--border);
+  border-top:1px solid var(--border);
+}
+@media(max-width:700px){ .m-row-body { grid-template-columns:1fr; } }
+.m-cell { background:var(--bg); padding:14px 16px; }
+.m-cell-label {
+  font-size:.65rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+  margin-bottom:6px;
+}
+.m-cell p { font-size:.8rem; color:var(--text2); line-height:1.55; }
+.m-sql-ref {
+  grid-column:1/-1; background:var(--bg3);
+  padding:8px 16px; font-size:.72rem; color:var(--text3);
+  border-top:1px solid var(--border);
+}
+
+/* ── QUESTION GROUP COLLAPSIBLE ── */
+details.q-group-wrap { background:transparent; }
+details.q-group-wrap > summary {
+  cursor:pointer; list-style:none;
+}
+details.q-group-wrap > summary::-webkit-details-marker { display:none; }
+details.q-group-wrap > summary .q-group-header { pointer-events:none; }
+details.q-group-wrap[open] > summary .q-chevron { transform:rotate(180deg); }
+.q-chevron {
+  margin-left:auto; flex-shrink:0;
+  width:18px; height:18px; color:var(--text3);
+  transition:transform .18s; display:inline-block;
+}
+
 </style>
 </head>
 <body>
@@ -454,13 +523,16 @@ mark.ph {
   <p class="section-sub">Every metric exists to answer a specific business question. Below are the 18 questions VAHDAM's data layer is built to answer — including 5 cross-source combinations that are only possible when all four data sources are loaded together. Single-source metrics are straightforward; combination metrics are where the real edge is.</p>
 
   <!-- GROUP A: REVENUE & MARGIN -->
-  <div class="q-group">
-    <div class="q-group-header">
-      <span class="q-group-icon">💰</span>
-      <span class="q-group-title">Revenue &amp; Margin</span>
-      <span class="q-group-sub">4 questions · Metrics 1, 2, 5, 8</span>
-    </div>
-    <div class="q-grid">
+  <details class="q-group-wrap" open>
+<summary>
+<div class="q-group-header" style="display:flex;align-items:center">
+  <span class="q-group-icon">💰</span>
+  <span class="q-group-title">Revenue &amp; Margin</span>
+  <span class="q-group-sub" style="margin-left:12px">4 questions · Metrics 1, 2, 5, 8</span>
+  <svg class="q-chevron" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5,7 9,11 13,7"/></svg>
+</div>
+</summary>
+<div class="q-grid">
 
       <div class="q-card">
         <div class="q-question">Is our revenue growing — and which market is driving it?</div>
@@ -515,16 +587,21 @@ mark.ph {
       </div>
 
     </div>
-  </div>
+  
+</details>
+
 
   <!-- GROUP B: CUSTOMER ECONOMICS -->
-  <div class="q-group">
-    <div class="q-group-header">
-      <span class="q-group-icon">📐</span>
-      <span class="q-group-title">Customer Economics</span>
-      <span class="q-group-sub">4 questions · Metrics 3, 6, 12, Bonus LTV · 2 combinations</span>
-    </div>
-    <div class="q-grid">
+  <details class="q-group-wrap" open>
+<summary>
+<div class="q-group-header" style="display:flex;align-items:center">
+  <span class="q-group-icon">📐</span>
+  <span class="q-group-title">Customer Economics</span>
+  <span class="q-group-sub" style="margin-left:12px">4 questions · Metrics 3, 6, 12, Bonus LTV · 2 combinations</span>
+  <svg class="q-chevron" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5,7 9,11 13,7"/></svg>
+</div>
+</summary>
+<div class="q-grid">
 
       <div class="q-card combo" style="--combo-a:var(--teal);--combo-b:var(--blue)">
         <div class="combo-tag" style="--combo-a:var(--teal);--combo-b:var(--blue)">⚡ Combination — 2 sources</div>
@@ -584,16 +661,21 @@ mark.ph {
       </div>
 
     </div>
-  </div>
+  
+</details>
+
 
   <!-- GROUP C: RETENTION -->
-  <div class="q-group">
-    <div class="q-group-header">
-      <span class="q-group-icon">🔁</span>
-      <span class="q-group-title">Retention &amp; Churn</span>
-      <span class="q-group-sub">5 questions · Metrics 4, 11, 13, 14, 15 · 1 combination</span>
-    </div>
-    <div class="q-grid">
+  <details class="q-group-wrap" open>
+<summary>
+<div class="q-group-header" style="display:flex;align-items:center">
+  <span class="q-group-icon">🔁</span>
+  <span class="q-group-title">Retention &amp; Churn</span>
+  <span class="q-group-sub" style="margin-left:12px">5 questions · Metrics 4, 11, 13, 14, 15 · 1 combination</span>
+  <svg class="q-chevron" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5,7 9,11 13,7"/></svg>
+</div>
+</summary>
+<div class="q-grid">
 
       <div class="q-card">
         <div class="q-question">What % of new buyers place a second order within 90 days?</div>
@@ -663,16 +745,21 @@ mark.ph {
       </div>
 
     </div>
-  </div>
+  
+</details>
+
 
   <!-- GROUP D: CHANNEL & EMAIL -->
-  <div class="q-group">
-    <div class="q-group-header">
-      <span class="q-group-icon">📧</span>
-      <span class="q-group-title">Channel &amp; Email Efficiency</span>
-      <span class="q-group-sub">3 questions · Metrics 7, 3+6 · 1 combination</span>
-    </div>
-    <div class="q-grid">
+  <details class="q-group-wrap" open>
+<summary>
+<div class="q-group-header" style="display:flex;align-items:center">
+  <span class="q-group-icon">📧</span>
+  <span class="q-group-title">Channel &amp; Email Efficiency</span>
+  <span class="q-group-sub" style="margin-left:12px">3 questions · Metrics 7, 3+6 · 1 combination</span>
+  <svg class="q-chevron" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5,7 9,11 13,7"/></svg>
+</div>
+</summary>
+<div class="q-grid">
 
       <div class="q-card combo" style="--combo-a:var(--purple);--combo-b:var(--green)">
         <div class="combo-tag" style="--combo-a:var(--purple);--combo-b:var(--green)">⚡ Combination — 2 sources</div>
@@ -704,16 +791,21 @@ mark.ph {
       </div>
 
     </div>
-  </div>
+  
+</details>
+
 
   <!-- GROUP E: CONVERSION & MIX -->
-  <div class="q-group">
-    <div class="q-group-header">
-      <span class="q-group-icon">🎯</span>
-      <span class="q-group-title">Conversion &amp; Revenue Mix</span>
-      <span class="q-group-sub">4 questions · Metrics 9, 10, 15+10 · 1 combination</span>
-    </div>
-    <div class="q-grid">
+  <details class="q-group-wrap" open>
+<summary>
+<div class="q-group-header" style="display:flex;align-items:center">
+  <span class="q-group-icon">🎯</span>
+  <span class="q-group-title">Conversion &amp; Revenue Mix</span>
+  <span class="q-group-sub" style="margin-left:12px">4 questions · Metrics 9, 10, 15+10 · 1 combination</span>
+  <svg class="q-chevron" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5,7 9,11 13,7"/></svg>
+</div>
+</summary>
+<div class="q-grid">
 
       <div class="q-card">
         <div class="q-question">Where exactly in the checkout funnel are we losing customers?</div>
@@ -774,7 +866,9 @@ mark.ph {
       </div>
 
     </div>
-  </div>
+  
+</details>
+
 
 <div>
       <div style="font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:4px">All numbers in this document are from synthetic seed data</div>
@@ -846,432 +940,409 @@ mark.ph {
     </div>
   </div>
 
-<div style="margin-top:56px">
-  <div class="section-label" style="color:var(--purple);margin-bottom:8px">Metric Registry</div>
-  <h3 style="font-size:1.35rem;font-weight:800;margin-bottom:8px">Every Metric: Question · Problem · Why It Matters</h3>
-  <p style="font-size:.92rem;color:var(--text2);max-width:680px;margin-bottom:36px">Each of the 15 metrics (plus the LTV by Market bonus) is defined here by the specific business question it answers, the problem it makes visible, and why tracking it changes decisions. Use these definitions to explain any metric to a stakeholder in 30 seconds.</p>
+<div class="m-accordion">
 
-  <div style="margin-bottom:40px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--amber)">
-      <span style="background:var(--amber);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:999px">Tier 1 — Business Health</span>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px">
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--amber);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)">M1</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">Net Revenue by Market</div>
-          </div>
-          <span class="src-badge src-matrixify" style="white-space:nowrap;flex-shrink:0">Matrixify</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">Where is our revenue actually coming from — US, UK, India, or rest of world?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Without market-level revenue breakdown you can't tell if growth is concentrated in one market masking decline in another, or whether currency exposure is distorting the top line.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Drives resource allocation, market-specific pricing decisions, and determines where to direct the next acquisition dollar. The foundation every other market strategy is built on.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 1 in queries/metrics.sql</div>
-      </div>
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--amber);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)">M2</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">New vs Returning Revenue</div>
-          </div>
-          <span class="src-badge src-matrixify" style="white-space:nowrap;flex-shrink:0">Matrixify</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">Is growth coming from new customer acquisition or from existing customers buying again?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Blended revenue hides whether you're on a treadmill — churn replacing acquisition at net zero customer growth — or genuinely compounding. A business that looks like it's growing can be dying if returning revenue % is falling.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">If returning revenue share declines month over month, you have a retention problem even while total revenue grows. This single ratio diagnoses acquisition dependency before it becomes a crisis.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 2 in queries/metrics.sql</div>
-      </div>
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--teal);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">M3</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">LTV:CAC Ratio by Channel</div>
-          </div>
-          <span class="src-badge src-shopify" style="white-space:nowrap;flex-shrink:0">Shopify Analytics</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">Is each acquisition channel generating more lifetime value than it costs to acquire customers from it?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">CAC alone is meaningless without LTV context. A $50 CAC is brilliant if LTV is $300 and destructive if LTV is $55. Channels below 3:1 destroy value with every customer acquired.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">The single most important channel health check. Determines which channels to scale, which to pause, and where reallocated budget will compound fastest. Below 2:1 for two consecutive months is a stop signal.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 3 in queries/metrics.sql</div>
-      </div>
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--purple);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--purple)">M4</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">Repeat Purchase Rate 90d</div>
-          </div>
-          <span class="src-badge src-matrixify" style="white-space:nowrap;flex-shrink:0">Matrixify</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">What percentage of new buyers come back within 90 days — by monthly cohort?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">A blended repeat rate hides whether the rate is improving or deteriorating. Viewing it by cohort reveals whether a product change, channel shift, or flow modification caused a structural change in customer behaviour.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">The 90-day repeat rate is the best single predictor of long-term LTV for a consumable DTC brand. A cohort with a higher 90d rate will be worth 2–4× more at 12 months. Every strategy decision should move this number.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 4 in queries/metrics.sql</div>
-      </div>
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--amber);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)">M5</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">Gross Margin % by Product Type</div>
-          </div>
-          <span class="src-badge src-matrixify" style="white-space:nowrap;flex-shrink:0">Matrixify</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">Which product categories actually make money after cost of goods — and which are eroding profitability?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Revenue without margin context is vanity. A high-revenue SKU at 10% margin funds less future growth than a mid-revenue SKU at 65% margin. Promotion and acquisition decisions made without this view optimise for the wrong outcome.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Sets the floor for viable CAC per product type, determines which SKUs to prioritise in paid acquisition, and drives subscription pricing decisions. Required input for any unit-economics model.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 5 in queries/metrics.sql</div>
-      </div>
-    </div>
+  <div class="m-tier-header">
+    <span class="tier-dot" style="background:#d97706"></span>
+    Tier 1 — Business Health
+    <span style="margin-left:auto;font-size:.68rem;font-weight:600;color:var(--text3)">Weekly Review</span>
   </div>
-  <div style="margin-bottom:40px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--teal)">
-      <span style="background:var(--teal);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:999px">Tier 2 — Growth Levers</span>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px">
 
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--teal);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">M6</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">CAC by Channel</div>
-          </div>
-          <span class="src-badge src-shopify" style="white-space:nowrap;flex-shrink:0">Shopify Analytics</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">How much does it actually cost to acquire one new customer from each marketing channel?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Marketing spend without per-channel CAC creates budget allocation by gut feel. Channels that look productive by session volume often have the worst cost-per-new-customer once the denominator is right.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">The denominator in LTV:CAC. Without accurate CAC you can't know whether any channel is profitable. Also exposes which channels bring in high-intent vs low-intent traffic, which informs creative strategy.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 6 in queries/metrics.sql</div>
+  <details class="m-row" style="--accent:#d97706">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#d97706">M1</span>
+      <span class="m-name">Net Revenue by Market</span>
+      <span class="m-question">Where is our revenue coming from — US, UK, India, or rest of world?</span>
+      <span class="src-badge src-matrixify" style="flex-shrink:0">Matrixify</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#d97706">Problem it solves</div>
+        <p>Without market-level breakdown you can't tell if growth is concentrated in one market masking decline in another, or whether currency exposure is distorting the top line.</p>
       </div>
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--purple);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--purple)">M7</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">Email Revenue % by Month</div>
-          </div>
-          <span class="src-badge src-klaviyo" style="white-space:nowrap;flex-shrink:0">Klaviyo</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">What share of total net revenue can be directly attributed to Klaviyo campaigns and flows?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">If email isn't contributing at least 20% of revenue, critical flows are missing or the list is unhealthy. Over-reliance on paid acquisition — where 100% of marginal revenue costs money — makes growth fragile and expensive.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Email and SMS are the highest-ROI owned channels. Knowing their revenue share tells you how much defensible, low-cost revenue you have vs paid-dependent revenue. A growing email % reduces overall CAC structurally.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 7 in queries/metrics.sql</div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>Drives resource allocation, market-specific pricing, and determines where to direct the next acquisition dollar. Every market strategy is built on this number.</p>
       </div>
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--amber);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)">M8</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">AOV Trend MoM</div>
-          </div>
-          <span class="src-badge src-matrixify" style="white-space:nowrap;flex-shrink:0">Matrixify</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">Is the average order value increasing, flat, or declining month over month — and what is causing it?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Flat AOV with stable order count means revenue is stagnating. Without MoM tracking, bundle and upsell effectiveness is invisible — you can't tell if pricing changes, promotions, or product launches moved the needle.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">AOV × purchase frequency = LTV. A 10% AOV improvement compounds across every customer. It also signals whether discounting is eroding basket value or whether upsell strategies are working.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 8 in queries/metrics.sql</div>
-      </div>
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--blue);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)">M9</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">Checkout Conversion Funnel</div>
-          </div>
-          <span class="src-badge src-webengage" style="white-space:nowrap;flex-shrink:0">WebEngage</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">At which exact stage — product view, add-to-cart, checkout, or payment — are we losing the most customers?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">If 70% of people who add to cart never complete a purchase, every dollar spent on acquisition is partially wasted. Funnel leaks are invisible without stage-by-stage event data — Shopify's native analytics only show the final conversion rate.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Funnel improvements multiply all upstream marketing spend. A fix that recovers 5% of cart abandonment benefits every channel simultaneously. This is the highest-leverage conversion investment available.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 9 in queries/metrics.sql</div>
-      </div>
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--coral);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral)">M10</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">Subscription Mix %</div>
-          </div>
-          <span class="src-badge src-matrixify" style="white-space:nowrap;flex-shrink:0">Matrixify</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">What percentage of monthly revenue comes from subscription orders vs one-time purchases?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">One-time orders create unpredictable, lumpy revenue. Every month starts from zero. Subscription revenue compounds: once a customer subscribes, revenue from that customer is near-certain until they cancel.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Subscription mix directly determines revenue predictability, LTV ceiling, and business valuation multiple. Moving from 20% to 50% subscription mix can increase valuation 2–3× on the same revenue base.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 10 in queries/metrics.sql</div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 1</p>
       </div>
     </div>
+  </details>
+
+  <details class="m-row" style="--accent:#d97706">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#d97706">M2</span>
+      <span class="m-name">New vs Returning Revenue</span>
+      <span class="m-question">Is growth coming from new customers or from existing customers buying again?</span>
+      <span class="src-badge src-matrixify" style="flex-shrink:0">Matrixify</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#d97706">Problem it solves</div>
+        <p>Blended revenue hides whether you're on a treadmill — churn replacing acquisition at net-zero customer growth — or genuinely compounding. A business that looks like it's growing can be dying if returning revenue share is falling.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>If returning revenue share declines month over month, you have a retention problem even while total revenue grows. This ratio diagnoses acquisition dependency before it becomes a crisis.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 2</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="m-row" style="--accent:#0d9488">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#0d9488">M3</span>
+      <span class="m-name">LTV:CAC Ratio by Channel</span>
+      <span class="m-question">Is each acquisition channel generating more lifetime value than it costs to acquire customers from it?</span>
+      <span class="src-badge src-shopify" style="flex-shrink:0">Shopify Analytics</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#0d9488">Problem it solves</div>
+        <p>CAC alone is meaningless without LTV context. A $50 CAC is brilliant if LTV is $300 and destructive if LTV is $55. Channels below 3:1 destroy value with every customer acquired.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>The single most important channel health check. Determines which channels to scale, which to pause, and where reallocated budget will compound fastest.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 3</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="m-row" style="--accent:#7c3aed">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#7c3aed">M4</span>
+      <span class="m-name">Repeat Purchase Rate 90d</span>
+      <span class="m-question">What percentage of new buyers come back within 90 days — tracked by cohort month?</span>
+      <span class="src-badge src-matrixify" style="flex-shrink:0">Matrixify</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#7c3aed">Problem it solves</div>
+        <p>A blended repeat rate hides whether the rate is improving or deteriorating. Viewing by cohort reveals whether a product change, channel shift, or flow modification caused a structural change in behaviour.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>The 90-day repeat rate is the best single predictor of long-term LTV for a consumable DTC brand. A cohort with a higher 90d rate will be worth 2–4× more at 12 months.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 4</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="m-row" style="--accent:#d97706">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#d97706">M5</span>
+      <span class="m-name">Gross Margin % by Product Type</span>
+      <span class="m-question">Which product categories make money after cost of goods — and which are eroding profitability?</span>
+      <span class="src-badge src-matrixify" style="flex-shrink:0">Matrixify</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#d97706">Problem it solves</div>
+        <p>Revenue without margin context is vanity. A high-revenue SKU at 10% margin funds less future growth than a mid-revenue SKU at 65% margin. Promotion decisions made without this view optimise for the wrong outcome.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>Sets the floor for viable CAC per product type, determines which SKUs to prioritise in acquisition, and drives subscription pricing decisions. Required for any unit-economics model.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 5</p>
+      </div>
+    </div>
+  </details>
+
+  <div class="m-tier-header">
+    <span class="tier-dot" style="background:#0d9488"></span>
+    Tier 2 — Growth Levers
+    <span style="margin-left:auto;font-size:.68rem;font-weight:600;color:var(--text3)">Weekly Review</span>
   </div>
-  <div style="margin-bottom:40px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--purple)">
-      <span style="background:var(--purple);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:999px">Tier 3 — Retention Intelligence</span>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px">
 
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--purple);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--purple)">M11</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">Cohort Retention 30/60/90d</div>
-          </div>
-          <span class="src-badge src-matrixify" style="white-space:nowrap;flex-shrink:0">Matrixify</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">Are customers still buying at 30, 60, and 90 days after their first purchase — and where does the cohort drop off?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">A single repeat rate doesn't show WHERE the drop-off happens. If 30-day retention is 15% but 60-day is also 15%, no one returns after the first window. If 30d is 5% and 90d is 25%, customers are slow starters — not churning.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Determines optimal flow trigger timing. If median second purchase is at day 45, a day-7 re-engagement email is firing 38 days too early. Cohort shape is the structural input for every post-purchase automation.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 11 in queries/metrics.sql</div>
+  <details class="m-row" style="--accent:#0d9488">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#0d9488">M6</span>
+      <span class="m-name">CAC by Channel</span>
+      <span class="m-question">How much does it cost to acquire one new customer from each marketing channel?</span>
+      <span class="src-badge src-shopify" style="flex-shrink:0">Shopify Analytics</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#0d9488">Problem it solves</div>
+        <p>Marketing spend without per-channel CAC creates allocation by gut feel. Channels that look productive by session volume often have the worst cost-per-new-customer once the denominator is right.</p>
       </div>
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--purple);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--purple)">M12</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">Time to 2nd Purchase</div>
-          </div>
-          <span class="src-badge src-matrixify" style="white-space:nowrap;flex-shrink:0">Matrixify</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">How many days does it typically take for a customer to make their second purchase — by market?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Post-purchase flows fire at arbitrary intervals by default. If your re-engagement email fires at day 60 but customers who return typically do so at day 21, you're missing the conversion window by 6 weeks — and attributing the miss to the product rather than the timing.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">The single structural input that sets trigger timing for every Klaviyo post-purchase flow. Run once per market segment. If US median is 21 days and UK is 45 days, flows need different timing by market to be effective.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 12 in queries/metrics.sql</div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>The denominator in LTV:CAC. Without accurate CAC you can't know whether any channel is profitable. Also exposes which channels bring in high-intent vs low-intent traffic.</p>
       </div>
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--purple);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--purple)">M13</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">Churn Risk Distribution</div>
-          </div>
-          <span class="src-badge src-klaviyo" style="white-space:nowrap;flex-shrink:0">Klaviyo</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">How many of our active customers are predicted by Klaviyo's model to churn in the next 90 days?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Churn is invisible until it registers in revenue — typically 2–3 months after the behaviour change. Klaviyo's predictive score gives a 30–90 day early warning window. Without it, you win-back customers who have already bought elsewhere.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Win-back is 5–7× cheaper than new acquisition. Acting on predicted churn before it happens is the highest-ROI retention lever. Knowing the distribution tells you the scale of the risk — and whether it requires urgent reallocation of budget.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 13 in queries/metrics.sql</div>
-      </div>
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--coral);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral)">M14</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">At-Risk Revenue</div>
-          </div>
-          <span class="src-badge src-klaviyo" style="white-space:nowrap;flex-shrink:0">Klaviyo</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">What is the total predicted 12-month CLV of customers currently flagged as high-risk or winback — by market?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Retention investment decisions require a dollar figure. '500 at-risk customers' doesn't move a budget conversation. '$180K in predicted CLV is at risk this quarter' does. This metric converts churn probability into a concrete revenue line.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Makes the business case for win-back campaign spend quantifiable. If 30% of at-risk CLV can be recovered, the expected recovery amount directly sets the maximum viable spend on win-back flows and incentives.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 14 in queries/metrics.sql</div>
-      </div>
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--coral);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral)">M15</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">Product Repeat Rate (Top 10)</div>
-          </div>
-          <span class="src-badge src-matrixify" style="white-space:nowrap;flex-shrink:0">Matrixify</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">Which specific SKUs are most effective at bringing customers back — regardless of what they buy on their next order?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Not all products are equal as customer relationship openers. A low-priced sampler might generate more lifetime value than a premium SKU by pulling customers into repeat purchase behaviour. Without this view, acquisition targets high-margin products that may not retain.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Identifies 'gateway SKUs' — the products that open long-term customer relationships. These are your highest-value acquisition targets and your top subscription conversion candidates. Combined with Metric 10, reveals SKUs that retain well but are under-subscribed.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ Metric 15 in queries/metrics.sql</div>
-      </div>
-
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--teal);display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-          <div>
-            <span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">BONUS</span>
-            <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-top:2px">LTV by Market</div>
-          </div>
-          <span class="src-badge src-matrixify" style="white-space:nowrap;flex-shrink:0">Matrixify</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:4px">Question it answers</div>
-            <div style="font-size:.85rem;color:var(--text);font-weight:500;line-height:1.5">Are US, UK, and India customers worth the same over their lifetime — and should we have a different CAC ceiling per market?</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:4px">Problem it solves</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">Applying the same CAC ceiling to all markets is wrong if LTV differs significantly. If UK customers have 2× the LTV of US customers, you're systematically overspending in the US and underspending in the UK.</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Why it is important</div>
-            <div style="font-size:.82rem;color:var(--text2);line-height:1.55">The market-level LTV split determines the correct CAC ceiling per geography — which is the primary input for media budget allocation. A market with 50% higher LTV can justify 50% higher CAC before the same 3:1 ratio breaks.</div>
-          </div>
-        </div>
-        <div style="font-size:.72rem;color:var(--text3);padding-top:4px;border-top:1px solid var(--border)">→ BONUS query in queries/metrics.sql</div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 6</p>
       </div>
     </div>
+  </details>
+
+  <details class="m-row" style="--accent:#7c3aed">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#7c3aed">M7</span>
+      <span class="m-name">Email Revenue % by Month</span>
+      <span class="m-question">What share of total net revenue can be directly attributed to Klaviyo campaigns and flows?</span>
+      <span class="src-badge src-klaviyo" style="flex-shrink:0">Klaviyo</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#7c3aed">Problem it solves</div>
+        <p>If email isn't contributing at least 20% of revenue, critical flows are missing or the list is unhealthy. Over-reliance on paid acquisition makes growth fragile and expensive.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>Email/SMS are the highest-ROI owned channels. A growing email revenue % reduces overall CAC structurally — every percentage point is margin that doesn't have to be paid to an ad platform.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 7</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="m-row" style="--accent:#d97706">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#d97706">M8</span>
+      <span class="m-name">AOV Trend MoM</span>
+      <span class="m-question">Is the average order value increasing, flat, or declining month over month — and what is driving it?</span>
+      <span class="src-badge src-matrixify" style="flex-shrink:0">Matrixify</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#d97706">Problem it solves</div>
+        <p>Flat AOV with stable order count means revenue is stagnating. Without MoM tracking, bundle and upsell effectiveness is invisible — you can't tell if pricing changes or promotions moved the needle.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>AOV × purchase frequency = LTV. A 10% AOV improvement compounds across every customer. It also signals whether discounting is eroding basket value or whether upsell strategies are working.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 8</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="m-row" style="--accent:#2563eb">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#2563eb">M9</span>
+      <span class="m-name">Checkout Conversion Funnel</span>
+      <span class="m-question">At which exact stage — product view, add-to-cart, checkout, or payment — are we losing the most customers?</span>
+      <span class="src-badge src-webengage" style="flex-shrink:0">WebEngage</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#2563eb">Problem it solves</div>
+        <p>If 70% of people who add to cart never complete a purchase, every dollar spent on acquisition is partially wasted. Funnel leaks are invisible without stage-by-stage event data.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>Funnel improvements multiply all upstream marketing spend. A fix that recovers 5% of cart abandonment benefits every channel simultaneously — highest-leverage conversion investment available.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 9</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="m-row" style="--accent:#e11d48">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#e11d48">M10</span>
+      <span class="m-name">Subscription Mix %</span>
+      <span class="m-question">What percentage of monthly revenue comes from subscription orders vs one-time purchases?</span>
+      <span class="src-badge src-matrixify" style="flex-shrink:0">Matrixify</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#e11d48">Problem it solves</div>
+        <p>One-time orders create unpredictable, lumpy revenue — every month starts from zero. Subscription revenue compounds: once a customer subscribes, revenue is near-certain until they cancel.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>Subscription mix directly determines revenue predictability, LTV ceiling, and valuation multiple. Moving from 20% to 50% subscription can increase valuation 2–3× on the same revenue base.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 10</p>
+      </div>
+    </div>
+  </details>
+
+  <div class="m-tier-header">
+    <span class="tier-dot" style="background:#7c3aed"></span>
+    Tier 3 — Retention Intelligence
+    <span style="margin-left:auto;font-size:.68rem;font-weight:600;color:var(--text3)">Monthly Review</span>
   </div>
+
+  <details class="m-row" style="--accent:#7c3aed">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#7c3aed">M11</span>
+      <span class="m-name">Cohort Retention 30/60/90d</span>
+      <span class="m-question">Are customers still buying at 30, 60, and 90 days after first purchase — and where does the cohort drop off?</span>
+      <span class="src-badge src-matrixify" style="flex-shrink:0">Matrixify</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#7c3aed">Problem it solves</div>
+        <p>A single repeat rate doesn't show WHERE the drop-off happens. If 30d and 90d retention are identical, no one returns after the first window. The shape of the curve changes the entire flow strategy.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>Determines optimal trigger timing for every post-purchase flow. If median second purchase is day 45, a day-7 re-engagement email fires 38 days too early. Cohort shape is the structural input for automation.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 11</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="m-row" style="--accent:#7c3aed">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#7c3aed">M12</span>
+      <span class="m-name">Time to 2nd Purchase</span>
+      <span class="m-question">How many days does it typically take for a customer to make a second purchase — segmented by market?</span>
+      <span class="src-badge src-matrixify" style="flex-shrink:0">Matrixify</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#7c3aed">Problem it solves</div>
+        <p>Post-purchase flows fire at arbitrary intervals by default. If your email fires at day 60 but customers who return typically do so at day 21, you are missing the conversion window by 6 weeks.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>The single structural input that sets trigger timing for every Klaviyo post-purchase flow. Run once per market segment — US and UK median values should drive different flow timing.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 12</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="m-row" style="--accent:#7c3aed">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#7c3aed">M13</span>
+      <span class="m-name">Churn Risk Distribution</span>
+      <span class="m-question">How many active customers are predicted to churn in the next 90 days — and how is risk distributed?</span>
+      <span class="src-badge src-klaviyo" style="flex-shrink:0">Klaviyo</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#7c3aed">Problem it solves</div>
+        <p>Churn is invisible until it registers in revenue, typically 2–3 months after the behaviour change. Klaviyo's predictive score gives a 30–90 day early warning. Without it, you win-back customers who have already bought elsewhere.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>Win-back is 5–7× cheaper than new acquisition. Acting on predicted churn before it happens is the highest-ROI retention lever. Knowing the distribution tells you the scale of risk and whether it requires urgent budget reallocation.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 13</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="m-row" style="--accent:#e11d48">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#e11d48">M14</span>
+      <span class="m-name">At-Risk Revenue</span>
+      <span class="m-question">What is the total predicted 12-month CLV of customers currently flagged as high-risk or winback?</span>
+      <span class="src-badge src-klaviyo" style="flex-shrink:0">Klaviyo</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#e11d48">Problem it solves</div>
+        <p>Retention investment decisions require a dollar figure. '500 at-risk customers' doesn't move a budget conversation. '$180K in predicted CLV is at risk this quarter' does.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>Converts churn probability into a concrete revenue line. If 30% of at-risk CLV can be recovered, the expected recovery amount directly sets the maximum viable spend on win-back flows and incentives.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 14</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="m-row" style="--accent:#e11d48">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#e11d48">M15</span>
+      <span class="m-name">Product Repeat Rate (Top 10)</span>
+      <span class="m-question">Which specific SKUs are most effective at bringing customers back — regardless of what they buy next?</span>
+      <span class="src-badge src-matrixify" style="flex-shrink:0">Matrixify</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#e11d48">Problem it solves</div>
+        <p>Not all products are equal as relationship openers. A low-priced sampler might generate more lifetime value than a premium SKU by pulling customers into repeat purchase behaviour. Without this view, acquisition targets high-margin products that may not retain.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>Identifies gateway SKUs — the products that open long-term customer relationships. These are your highest-value acquisition targets and top subscription conversion candidates.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — Metric 15</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="m-row" style="--accent:#0d9488">
+    <summary class="m-row-summary">
+      <span class="m-badge" style="background:#0d9488">BONUS</span>
+      <span class="m-name">LTV by Market</span>
+      <span class="m-question">Are US, UK, and India customers worth the same over their lifetime — or should each market have a different CAC ceiling?</span>
+      <span class="src-badge src-matrixify" style="flex-shrink:0">Matrixify</span>
+      <svg class="m-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+    </summary>
+    <div class="m-row-body">
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#0d9488">Problem it solves</div>
+        <p>Applying the same CAC ceiling to all markets is wrong if LTV differs significantly. If UK customers have 2× the LTV of US customers, you are systematically overspending in the US and underspending in the UK.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:#16a34a">Why it is important</div>
+        <p>The market-level LTV split determines the correct CAC ceiling per geography — the primary input for media budget allocation. A market with 50% higher LTV can justify 50% higher CAC before the same 3:1 ratio breaks.</p>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label" style="color:var(--text3)">SQL Reference</div>
+        <p style="font-family:monospace;font-size:.78rem">queries/metrics.sql — BONUS query</p>
+      </div>
+    </div>
+  </details>
 </div>
 </div>
 </section>
