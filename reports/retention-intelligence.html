@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VAHDAM DTC — Retention Intelligence</title>
+<title>Vahdam D2C · Retention Intelligence</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 <meta name="theme-color" content="#004A2B">
@@ -1120,7 +1120,20 @@ const APEX_BASE = {
   grid: { borderColor: 'rgba(171,135,67,0.08)', strokeDashArray: 3 },
   tooltip: { theme: 'dark' },
   dataLabels: { enabled: false },
-  legend: { labels: { colors: '#9aaaa1' }, fontSize: '11px' },
+  legend: { 
+    labels: { colors: '#9aaaa1' }, 
+    fontSize: '11px',
+    markers: { radius: 12 }
+  },
+  responsive: [{
+    breakpoint: 640,
+    options: {
+      chart: { height: 240 },
+      legend: { position: 'bottom', fontSize: '10px' },
+      xaxis: { labels: { style: { fontSize: '9px' } } },
+      yaxis: { labels: { style: { fontSize: '9px' } } }
+    }
+  }]
 };
 
 const REGION_COLORS = { US: '#3b82f6', UK: '#f97316', Global: '#AB8743' };
